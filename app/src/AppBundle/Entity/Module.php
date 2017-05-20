@@ -41,13 +41,14 @@ class Module
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="modules", cascade={"persist"})
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      */
     private $course;
 
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Theme", mappedBy="module", cascade={"persist", "remove"})
+     * @Groups({"read","write"})
      */
     private $themes;
 

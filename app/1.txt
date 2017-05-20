@@ -1,0 +1,10 @@
+PHPUnit 5.4.8 by Sebastian Bergmann and contributors.
+
+Testing Project Test Suite
+.                                                                   1 / 1 (100%)
+
+Time: 417 ms, Memory: 22.00MB
+
+[30;42mOK (1 test, 1 assertion)[0m
+[32mOK[0m ./vendor/bin/simple-phpunit
+

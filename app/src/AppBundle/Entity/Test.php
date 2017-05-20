@@ -66,10 +66,11 @@ class Test
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="tests")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Student", inversedBy="tests")
+     * @ORM\JoinColumn(name="student_id", referencedColumnName="id")
+     * @Groups({"read","write"})
      */
-    private $user;
+    private $student;
 
     /**
      * Get id
@@ -180,19 +181,18 @@ class Test
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getStudent()
     {
-        return $this->user;
+        return $this->student;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $student
      */
-    public function setUser($user)
+    public function setStudent($student)
     {
-        $this->user = $user;
+        $this->student = $student;
     }
-
 
 }
 

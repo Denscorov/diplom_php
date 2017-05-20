@@ -1,0 +1,1442 @@
+{
+    "swagger": "2.0",
+    "basePath": "\/api",
+    "info": {
+        "title": "Testing_OKM",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "\/answers": {
+            "get": {
+                "tags": [
+                    "Answer"
+                ],
+                "operationId": "getAnswerCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of Answer resources.",
+                "responses": {
+                    "200": {
+                        "description": "Answer collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Answer_45f28e6683c923d629dea6466d6b7259"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Answer"
+                ],
+                "operationId": "postAnswerCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a Answer resource.",
+                "parameters": [
+                    {
+                        "name": "answer",
+                        "in": "body",
+                        "description": "The new Answer resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Answer_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Answer resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/Answer_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/answers\/{id}": {
+            "get": {
+                "tags": [
+                    "Answer"
+                ],
+                "operationId": "getAnswerItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a Answer resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Answer resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/Answer_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Answer"
+                ],
+                "operationId": "putAnswerItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the Answer resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "answer",
+                        "in": "body",
+                        "description": "The updated Answer resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Answer_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Answer resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/Answer_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Answer"
+                ],
+                "operationId": "deleteAnswerItem",
+                "summary": "Removes the Answer resource.",
+                "responses": {
+                    "204": {
+                        "description": "Answer resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "\/courses": {
+            "get": {
+                "tags": [
+                    "Course"
+                ],
+                "operationId": "getCourseCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of Course resources.",
+                "responses": {
+                    "200": {
+                        "description": "Course collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Course_45f28e6683c923d629dea6466d6b7259"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Course"
+                ],
+                "operationId": "postCourseCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a Course resource.",
+                "parameters": [
+                    {
+                        "name": "course",
+                        "in": "body",
+                        "description": "The new Course resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Course_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Course resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/Course_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/courses\/{id}": {
+            "get": {
+                "tags": [
+                    "Course"
+                ],
+                "operationId": "getCourseItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a Course resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/Course_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Course"
+                ],
+                "operationId": "putCourseItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the Course resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "course",
+                        "in": "body",
+                        "description": "The updated Course resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Course_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/Course_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Course"
+                ],
+                "operationId": "deleteCourseItem",
+                "summary": "Removes the Course resource.",
+                "responses": {
+                    "204": {
+                        "description": "Course resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "\/modules": {
+            "get": {
+                "tags": [
+                    "Module"
+                ],
+                "operationId": "getModuleCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of Module resources.",
+                "responses": {
+                    "200": {
+                        "description": "Module collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Module_45f28e6683c923d629dea6466d6b7259"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Module"
+                ],
+                "operationId": "postModuleCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a Module resource.",
+                "parameters": [
+                    {
+                        "name": "module",
+                        "in": "body",
+                        "description": "The new Module resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Module_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Module resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/Module_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/modules\/{id}": {
+            "get": {
+                "tags": [
+                    "Module"
+                ],
+                "operationId": "getModuleItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a Module resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Module resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/Module_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Module"
+                ],
+                "operationId": "putModuleItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the Module resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "module",
+                        "in": "body",
+                        "description": "The updated Module resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Module_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Module resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/Module_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Module"
+                ],
+                "operationId": "deleteModuleItem",
+                "summary": "Removes the Module resource.",
+                "responses": {
+                    "204": {
+                        "description": "Module resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "\/questions": {
+            "get": {
+                "tags": [
+                    "Question"
+                ],
+                "operationId": "getQuestionCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of Question resources.",
+                "responses": {
+                    "200": {
+                        "description": "Question collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Question_45f28e6683c923d629dea6466d6b7259"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Question"
+                ],
+                "operationId": "postQuestionCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a Question resource.",
+                "parameters": [
+                    {
+                        "name": "question",
+                        "in": "body",
+                        "description": "The new Question resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Question_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Question resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/Question_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/questions\/{id}": {
+            "get": {
+                "tags": [
+                    "Question"
+                ],
+                "operationId": "getQuestionItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a Question resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Question resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/Question_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Question"
+                ],
+                "operationId": "putQuestionItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the Question resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "question",
+                        "in": "body",
+                        "description": "The updated Question resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Question_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Question resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/Question_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Question"
+                ],
+                "operationId": "deleteQuestionItem",
+                "summary": "Removes the Question resource.",
+                "responses": {
+                    "204": {
+                        "description": "Question resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "\/tests": {
+            "get": {
+                "tags": [
+                    "Test"
+                ],
+                "operationId": "getTestCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of Test resources.",
+                "responses": {
+                    "200": {
+                        "description": "Test collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Test_45f28e6683c923d629dea6466d6b7259"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Test"
+                ],
+                "operationId": "postTestCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a Test resource.",
+                "parameters": [
+                    {
+                        "name": "test",
+                        "in": "body",
+                        "description": "The new Test resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Test_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Test resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/Test_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/tests\/{id}": {
+            "get": {
+                "tags": [
+                    "Test"
+                ],
+                "operationId": "getTestItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a Test resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Test resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/Test_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Test"
+                ],
+                "operationId": "putTestItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the Test resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "test",
+                        "in": "body",
+                        "description": "The updated Test resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Test_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Test resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/Test_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Test"
+                ],
+                "operationId": "deleteTestItem",
+                "summary": "Removes the Test resource.",
+                "responses": {
+                    "204": {
+                        "description": "Test resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "\/themes": {
+            "get": {
+                "tags": [
+                    "Theme"
+                ],
+                "operationId": "getThemeCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of Theme resources.",
+                "responses": {
+                    "200": {
+                        "description": "Theme collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/Theme_45f28e6683c923d629dea6466d6b7259"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Theme"
+                ],
+                "operationId": "postThemeCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a Theme resource.",
+                "parameters": [
+                    {
+                        "name": "theme",
+                        "in": "body",
+                        "description": "The new Theme resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Theme_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Theme resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/Theme_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/themes\/{id}": {
+            "get": {
+                "tags": [
+                    "Theme"
+                ],
+                "operationId": "getThemeItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a Theme resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Theme resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/Theme_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Theme"
+                ],
+                "operationId": "putThemeItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the Theme resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "theme",
+                        "in": "body",
+                        "description": "The updated Theme resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/Theme_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Theme resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/Theme_45f28e6683c923d629dea6466d6b7259"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Theme"
+                ],
+                "operationId": "deleteThemeItem",
+                "summary": "Removes the Theme resource.",
+                "responses": {
+                    "204": {
+                        "description": "Theme resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "\/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "getUserCollection",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves the collection of User resources.",
+                "responses": {
+                    "200": {
+                        "description": "User collection response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#\/definitions\/User_2f846745111dbf7f578f213723b41a8a"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "postUserCollection",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Creates a User resource.",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The new User resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/User_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User resource created",
+                        "schema": {
+                            "$ref": "#\/definitions\/User_2f846745111dbf7f578f213723b41a8a"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "\/users\/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "getUserItem",
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Retrieves a User resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User resource response",
+                        "schema": {
+                            "$ref": "#\/definitions\/User_2f846745111dbf7f578f213723b41a8a"
+                        }
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "putUserItem",
+                "consumes": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "produces": [
+                    "application\/json",
+                    "text\/html"
+                ],
+                "summary": "Replaces the User resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The updated User resource",
+                        "schema": {
+                            "$ref": "#\/definitions\/User_7d39c2a2cb75538941751cf280366832"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User resource updated",
+                        "schema": {
+                            "$ref": "#\/definitions\/User_2f846745111dbf7f578f213723b41a8a"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "operationId": "deleteUserItem",
+                "summary": "Removes the User resource.",
+                "responses": {
+                    "204": {
+                        "description": "User resource deleted"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Answer_45f28e6683c923d629dea6466d6b7259": {
+            "type": "object",
+            "description": "Answer",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "corect": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "text",
+                "corect"
+            ]
+        },
+        "Answer_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "Answer",
+            "required": [
+                "text",
+                "corect"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "corect": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Course_45f28e6683c923d629dea6466d6b7259": {
+            "type": "object",
+            "description": "Course",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "Course_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "Course",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Module_45f28e6683c923d629dea6466d6b7259": {
+            "type": "object",
+            "description": "Module",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "course": {
+                    "$ref": "#\/definitions\/Course_45f28e6683c923d629dea6466d6b7259"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "Module_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "Module",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "course": {
+                    "$ref": "#\/definitions\/Course_7d39c2a2cb75538941751cf280366832"
+                }
+            }
+        },
+        "Question_45f28e6683c923d629dea6466d6b7259": {
+            "type": "object",
+            "description": "Question",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "level": {
+                    "type": "integer"
+                },
+                "theme": {
+                    "readOnly": true,
+                    "description": "Many Features have One Product.",
+                    "$ref": "#\/definitions\/Theme_45f28e6683c923d629dea6466d6b7259"
+                },
+                "myEquivalent": {
+                    "readOnly": true,
+                    "description": "Many Users have many Users.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#\/definitions\/Question_45f28e6683c923d629dea6466d6b7259"
+                    }
+                }
+            },
+            "required": [
+                "text",
+                "type",
+                "level"
+            ]
+        },
+        "Question_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "Question",
+            "required": [
+                "text",
+                "type",
+                "level"
+            ],
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "level": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Test_45f28e6683c923d629dea6466d6b7259": {
+            "type": "object",
+            "description": "Test",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "qCount": {
+                    "type": "integer"
+                },
+                "qTCount": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "type",
+                "description",
+                "qCount",
+                "qTCount"
+            ]
+        },
+        "Test_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "Test",
+            "required": [
+                "type",
+                "description",
+                "qCount",
+                "qTCount"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "qCount": {
+                    "type": "integer"
+                },
+                "qTCount": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Theme_45f28e6683c923d629dea6466d6b7259": {
+            "type": "object",
+            "description": "Theme",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "module": {
+                    "$ref": "#\/definitions\/Module_45f28e6683c923d629dea6466d6b7259"
+                }
+            }
+        },
+        "Theme_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "Theme",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "module": {
+                    "$ref": "#\/definitions\/Module_7d39c2a2cb75538941751cf280366832"
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "User_2f846745111dbf7f578f213723b41a8a": {
+            "type": "object",
+            "description": "User",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "integer"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "User_7d39c2a2cb75538941751cf280366832": {
+            "type": "object",
+            "description": "User",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

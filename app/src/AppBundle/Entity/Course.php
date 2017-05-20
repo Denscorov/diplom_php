@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * Course
  * @ApiResource(attributes={
  *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}}
+ *     "denormalization_context"={"groups"={"write"}},
+ *     "collectionOperations"={"get"={"method"="GET"}}
  * })
  * @ORM\Table(name="course")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CourseRepository")
@@ -42,6 +43,7 @@ class Course
     /**
      * @var Module
      * @ORM\OneToMany(targetEntity="Module", mappedBy="course", cascade={"persist", "remove"})
+     * @Groups({"read"})
      */
     private $modules;
 
