@@ -48,7 +48,7 @@ class Module
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Theme", mappedBy="module", cascade={"persist", "remove"})
-     * @Groups({"read","write"})
+     * @Groups({"read"})
      */
     private $themes;
 
@@ -104,6 +104,7 @@ class Module
     public function setCourse($course)
     {
         $this->course = $course;
+        $this->course->addModule($this);
     }
 
     /**

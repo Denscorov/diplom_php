@@ -26,7 +26,7 @@ class Theme
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"write"})
+     * @Groups({"read"})
      */
     public $id;
 
@@ -49,7 +49,7 @@ class Theme
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Question", mappedBy="theme", cascade={"remove"})
-     * @Groups({"write","read"})
+     *
      */
     private $questions;
 

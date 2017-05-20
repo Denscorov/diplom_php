@@ -31,9 +31,21 @@ class User extends BaseUser
      */
     private $students;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $firstName;
+
     public function __construct()
     {
-        parent::__construct();
+        $this->enabled = false;
         $this->students = new ArrayCollection();
     }
 
@@ -61,6 +73,37 @@ class User extends BaseUser
         $this->students = $students;
     }
 
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
 
 
 }

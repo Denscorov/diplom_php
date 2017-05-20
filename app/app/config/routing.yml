@@ -6,3 +6,10 @@ api:
     resource: '.'
     type:     'api_platform'
     prefix:   '/api' # Optional
+
+fos_user_login:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
