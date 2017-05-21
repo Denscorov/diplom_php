@@ -1,0 +1,19 @@
+course_api:
+    type: rest
+    resource: AppBundle\Controller\Api\CourseController
+
+module_api:
+    type: rest
+    resource: AppBundle\Controller\Api\ModuleController
+
+theme_api:
+    type: rest
+    resource: AppBundle\Controller\Api\ThemeController
+
+question_api:
+    type: rest
+    resource: AppBundle\Controller\Api\QuestionController
+
+answer_api:
+    type: rest
+    resource: AppBundle\Controller\Api\AnswerController

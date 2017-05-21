@@ -1,0 +1,7 @@
+#AppBundle\Entity\Course:
+#    exclusion_policy: ALL
+#    properties :
+#        id :
+#            expose : true
+#        modules:
+#            max_depth: 1

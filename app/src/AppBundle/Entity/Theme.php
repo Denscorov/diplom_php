@@ -4,19 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as JMS;
 
 
 /**
  * Theme
- * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}}
- * })
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ThemeRepository")
+ * @JMS\ExclusionPolicy("ALL")
  */
 class Theme
 {
@@ -26,7 +22,7 @@ class Theme
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
+     * @JMS\Expose
      */
     public $id;
 
@@ -34,8 +30,8 @@ class Theme
      * @var string
      *
      * @ORM\Column(name="Name", type="string", length=255)
-     * @Groups({"write","read"})
      * @Assert\NotBlank()
+     * @JMS\Expose
      */
     private $name;
 

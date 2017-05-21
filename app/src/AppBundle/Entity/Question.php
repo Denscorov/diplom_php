@@ -4,18 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Question
- * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}}
- * })
  * @ORM\Table(name="question")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\QuestionRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Question
 {
@@ -25,7 +21,7 @@ class Question
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
+     * @JMS\Expose
      */
     private $id;
 
@@ -34,7 +30,7 @@ class Question
      *
      * @ORM\Column(name="Text", type="string", length=255)
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $text;
 
@@ -43,7 +39,7 @@ class Question
      *
      * @ORM\Column(name="Type", type="integer")
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $type;
 
@@ -52,7 +48,7 @@ class Question
      *
      * @ORM\Column(name="Level", type="integer")
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $level;
 
@@ -60,13 +56,14 @@ class Question
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Theme", inversedBy="questions")
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
-     * @Groups({"read"})
+     *
      */
     private $theme;
 
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Answer", mappedBy="question", cascade={"persist", "remove"})
+     * @JMS\Expose
      */
     private $answers;
 
@@ -83,7 +80,7 @@ class Question
      *      joinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="equivalent_question_id", referencedColumnName="id")}
      *      )
-     * @Groups({"read"})
+     * @JMS\Expose
      */
     private $myEquivalent;
 

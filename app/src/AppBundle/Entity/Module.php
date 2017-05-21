@@ -4,18 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Module
- * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}}
- * })
+ *
  * @ORM\Table(name="module")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ModuleRepository")
+ * @JMS\ExclusionPolicy("ALL")
  */
 class Module
 {
@@ -25,7 +22,7 @@ class Module
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
+     * @JMS\Expose
      */
     private $id;
 
@@ -34,21 +31,21 @@ class Module
      *
      * @ORM\Column(name="Name", type="string", length=255)
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="modules", cascade={"persist"})
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
-     * @Groups({"write"})
      */
     private $course;
 
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Theme", mappedBy="module", cascade={"persist", "remove"})
-     * @Groups({"read"})
+     * @JMS\MaxDepth(1)
+     * @JMS\Expose
      */
     private $themes;
 
@@ -104,23 +101,31 @@ class Module
     public function setCourse($course)
     {
         $this->course = $course;
-        $this->course->addModule($this);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getThemes()
-    {
-        return $this->themes;
+//    /**
+//     * @return mixed
+//     */
+//    public function getThemes()
+//    {
+//        return $this->themes;
+//    }
+//
+//    /**
+//     * @param mixed $themes
+//     */
+//    public function setThemes($themes)
+//    {
+//        $this->themes = $themes;
+//    }
+
+    public function addTheme($theme){
+        $theme->setModule($this);
+        $this->themes->add($theme);
     }
 
-    /**
-     * @param mixed $themes
-     */
-    public function setThemes($themes)
-    {
-        $this->themes = $themes;
+    public function removeTheme($theme){
+        $this->themes->remove($theme);
     }
 
     function __toString()

@@ -16,4 +16,12 @@ class DefaultController extends Controller
     {
         return $this->render('AppBundle:pages:index.html.twig');
     }
+
+    /**
+     * @Route("/list", name="list")
+     */
+    public function listAction(Request $request)
+    {
+        return $this->render('AppBundle:pages:list.html.twig');
+    }
 }

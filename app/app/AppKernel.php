@@ -17,13 +17,16 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
 
-            new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
+//            new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
 
 
-            new Dunglas\ActionBundle\DunglasActionBundle(),
+//            new Dunglas\ActionBundle\DunglasActionBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
 //            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
         ];

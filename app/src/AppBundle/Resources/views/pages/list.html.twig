@@ -1,0 +1,301 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block css %}
+    <style>
+
+        ul.list, ul.list ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: block;
+        }
+
+        ul.list li {
+            display: block;
+            width: 100%;
+            padding: 15px 10px;
+            margin: 5px 0;
+            border: 1px solid #414141;
+            /*background: #eee;*/
+        }
+
+        ul[level="1"] li{
+            background: #eee;
+        }
+
+        ul[level="2"] li{
+            background: #ddd;
+        }
+
+        ul[level="3"] li{
+            background: #ccc;
+        }
+
+        ul[level="2"] li:hover {
+            background: #ddd;
+        }
+
+        ul[level="3"] li:hover {
+            background: #ccc;
+        }
+
+        .add {
+            border: 1px solid #414141;
+            background: #eee;
+            color: #414141;
+            padding: 10px 15px;
+            margin: 5px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="add" id="add_course" data-toggle="modal" data-target="#course">Добавити курс</button>
+                <button class="add" id="add_module" data-toggle="modal" data-target="#module">Добавити модуль</button>
+                <button class="add" id="add_theme" data-toggle="modal" data-target="#theme">Добавити тему</button>
+            </div>
+
+            <div class="col-md-12">
+                <ul class="list">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="course" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Новий курс</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="course_form">
+                                <label for="course_name">Назва</label>
+                                <input type="text" name="name" id="course_name">
+                                <input type="submit" id="course_sub" value="Зберегти">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="module" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Новий модуль</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="module_form">
+                                <label for="module_name">Назва</label>
+                                <input type="text" name="name" id="module_name">
+                                <label for="module_course">Курс</label>
+                                <select name="course" id="module_course"></select>
+                                <input type="submit" value="Зберегти" id="module_sub">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="theme" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="theme_form">
+                                <label for="theme_name">Назва</label>
+                                <input type="text" name="name" id="theme_name">
+                                <label for="theme_module">Модуль</label>
+                                <select name="module" id="theme_module"></select>
+                                <input type="submit" value="Зберегти" id="theme_sub">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            var url = "{{ path('get_courses') }}";
+            var ulL1 = $('ul.list');
+            var array = [];
+
+            updateArray();
+
+            function updateArray() {
+                $.getJSON(url, function (data) {
+                    generateList(data);
+                    array = data;
+                });
+                generateList(array);
+            }
+
+            function generateList(data) {
+                $(ulL1).empty();
+                $(ulL1).attr('level', 1);
+                $.each(data, function (key, val) {
+                    var liL1 = document.createElement('li');
+                    $(liL1).text("Курс: " + val.name);
+                    $(liL1).attr('obj_id', val.id);
+                    $(liL1).attr('obj_type', 'courses');
+                    if (val.modules.length > 0) {
+                        var ulL2 = document.createElement('ul');
+                        $(ulL2).attr('level', 2);
+                        $.each(val.modules, function (key, val) {
+                            var liL2 = document.createElement('li');
+                            $(liL2).text("Модуль: " + val.name);
+                            $(liL2).attr('obj_id', val.id);
+                            $(liL2).attr('obj_type', 'modules');
+                            if (val.themes.length > 0) {
+                                var ulL3 = document.createElement('ul');
+                                $(ulL3).attr('level', 3);
+                                $.each(val.themes, function (key, val) {
+                                    var liL3 = document.createElement('li');
+                                    $(liL3).text("Тема: " + val.name);
+                                    $(liL3).attr('obj_id', val.id);
+                                    $(liL3).attr('obj_type', 'themes');
+                                    ulL3.append(liL3);
+                                });
+                                $(liL2).append(ulL3);
+                            }
+                            $(ulL2).append(liL2);
+                        });
+                        $(liL1).append(ulL2);
+                    }
+                    $(ulL1).append(liL1);
+                });
+            }
+
+            $('.modal').on('hidden.bs.modal', function (e) {
+                updateArray();
+            });
+
+            $('#course_sub').click(function (e) {
+
+                e.preventDefault();
+
+                var array = $('.course_form').serializeArray();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('post_course') }}",
+                    data: array,
+                    success: function (data) {
+                        $('#course').modal('hide');
+                        reset();
+                    },
+                    dataType: "json"
+                });
+
+
+            });
+
+            $('#module').on('show.bs.modal', function (e) {
+                $('#module_course').empty();
+                $.getJSON("{{ path('get_courses') }}",function (data) {
+                    $.each(data, function (i, item) {
+                        $('#module_course').append($('<option>', {
+                            value: item.id,
+                            text : item.name
+                        }));
+                    });
+                });
+
+            });
+
+            $('#module_sub').click(function (e) {
+               e.preventDefault();
+               var array = $('.module_form').serializeArray();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('post_module') }}",
+                    data: array,
+                    success: function (data) {
+                        $('#module').modal('hide');
+                        reset();
+                    },
+                    dataType: "json"
+                });
+            });
+
+            $('#theme').on('show.bs.modal', function (e) {
+                $('#theme_module').empty();
+                $.getJSON("{{ path('get_modules') }}",function (data) {
+                    $.each(data, function (i, item) {
+                        $('#theme_module').append($('<option>', {
+                            value: item.id,
+                            text : item.name
+                        }));
+                    });
+                });
+
+            });
+
+            $('#theme_sub').click(function (e) {
+               e.preventDefault();
+
+               var array = $('.theme_form').serializeArray();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('post_theme') }}",
+                    data: array,
+                    success: function (data) {
+                        $('#theme').modal('hide');
+                        reset();
+                    },
+                    dataType: "json"
+                });
+            });
+
+            function reset() {
+                $('input[type="text"]').val("");
+            }
+
+        })
+    </script>
+{% endblock %}

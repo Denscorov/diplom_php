@@ -1,90 +1,36 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ asset('/bundles/app/jqwidgets/styles/jqx.base.css') }}">
+    {#<link rel="stylesheet" href="{{ asset('/bundles/app/jqwidgets/styles/jqx.base.css') }}">#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="btn-group" role="group">
-                    {#<button type="button" class="btn btn-default" disabled>Show</button>#}
-                    <button type="button" class="btn btn-warning edit" disabled>Edit</button>
-                    <button type="button" class="btn btn-danger delete" disabled >Delete</button>
-                    <button type="button" class="btn btn-success child" disabled >Add child</button>
-                    <button type="button" class="btn btn-success next" disabled >Add next</button>
+            {% if is_granted('ROLE_USER') %}
+                <div class="col-md-12">
+                    <div class="btn-group" role="group">
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div id="jqxTree">
-                    <ul class="list"></ul>
+            {% else %}
+                <div class="col-md-12">
+                    <h1 class="text-center text-danger">Для перегляду увійдіть у систему!!!</h1>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
 
 {% block js %}
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxcore.js') }}"></script>
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxdata.js') }}"></script>
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxbuttons.js') }}"></script>
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxbuttons.js') }}"></script>
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxscrollbar.js') }}"></script>
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxpanel.js') }}"></script>
-    <script src="{{ asset('/bundles/app/jqwidgets/jqxtree.js') }}"></script>
+
     <script>
         $(function () {
-            var tree = $('#jqxTree'),
-                url = "{{ path('api_courses_get_collection') }}";
 
-            $.getJSON(url, function (data) {
-                var ulL1 = $('ul.list');
-                $.each(data, function (key, val) {
-                    var liL1 = document.createElement('li');
-                    $(liL1).text(val.name);
-                    $(liL1).attr('obj_id', val.id);
-                    $(liL1).attr('obj_type', 'courses');
-                    if (val.modules.length > 0) {
-                        var ulL2 = document.createElement('ul');
-                        $.each(val.modules, function (key, val) {
-                            var liL2 = document.createElement('li');
-                            $(liL2).text(val.name);
-                            $(liL2).attr('obj_id', val.id);
-                            $(liL2).attr('obj_type', 'modules');
-                            if (val.themes.length > 0) {
-                                var ulL3 = document.createElement('ul');
-                                $.each(val.themes, function (key, val) {
-                                    var liL3 = document.createElement('li');
-                                    $(liL3).text(val.name);
-                                    $(liL3).attr('obj_id', val.id);
-                                    $(liL3).attr('obj_type', 'themes');
-                                    ulL3.append(liL3);
-                                });
-                                $(liL2).append(ulL3);
-                            }
-                            $(ulL2).append(liL2);
-                        });
-                        $(liL1).append(ulL2);
-                    }
-                    $(ulL1).append(liL1);
-                });
-                tree.jqxTree();
-            });
-            tree.on('select', function (event) {
-                $('.edit, .delete, .child, .next').attr('disabled',true);
-                $('.edit, .delete').removeAttr('disabled');
-                var element = event.args.element;
-                var item = $('#jqxTree').jqxTree('getItem', element);
-                if (item.level == 0){
-                    $('.btn.child, .btn.next').removeAttr('disabled');
-                }
-                if (item.level == 1){
-                    $('.btn.child').removeAttr('disabled');
-                }
-                console.log(item);
-            });
-        });
 
+
+        })
     </script>
+    {#{% endspaceless %}#}
 {% endblock %}

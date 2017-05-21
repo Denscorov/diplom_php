@@ -36,6 +36,10 @@ framework:
     assets: ~
     php_errors:
         log: true
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
 
 # Twig Configuration
 twig:
@@ -83,31 +87,31 @@ nelmio_cors:
     paths:
         '^/': ~
 
-api_platform:
-
-    # The title of the API.
-    title: 'Testing_OKM'
-
-    # The description of the API.
-    description: ''
-
-    # The version of the API.
-    version: '1.0.0'
-
-    # Specify the default operation path resolver to use for generating resources operations path.
-    default_operation_path_resolver: 'api_platform.operation_path_resolver.underscore'
-
-    # Enable the FOSUserBundle integration.
-    enable_fos_user: true
-
-    # Enable the Nelmio Api doc integration.
-    enable_nelmio_api_doc: true
-    formats:
-        json:
-            mime_types: ['application/json']
-
-        html:
-            mime_types: ['text/html']
+#api_platform:
+#
+#    # The title of the API.
+#    title: 'Testing_OKM'
+#
+#    # The description of the API.
+#    description: ''
+#
+#    # The version of the API.
+#    version: '1.0.0'
+#
+#    # Specify the default operation path resolver to use for generating resources operations path.
+#    default_operation_path_resolver: 'api_platform.operation_path_resolver.underscore'
+#
+#    # Enable the FOSUserBundle integration.
+#    enable_fos_user: true
+#
+#    # Enable the Nelmio Api doc integration.
+#    enable_nelmio_api_doc: true
+#    formats:
+#        json:
+#            mime_types: ['application/json']
+#
+#        html:
+#            mime_types: ['text/html']
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
@@ -116,3 +120,44 @@ fos_user:
     from_email:
         address: "den.scorov1@gmail.com"
         sender_name: "DenSkorov"
+
+fos_rest:
+    body_listener: true
+    param_fetcher_listener: true
+    view:
+        view_response_listener: 'force'
+#        exception_wrapper_handler:  null
+        formats:
+            json: true
+        mime_types:
+            json: ['application/json', 'application/x-json']
+        jsonp_handler: ~
+    routing_loader:
+        default_format:  json
+        include_format:  false
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: [ 'json'], fallback_format: ~, prefer_extension: false }
+            - { path: '^/', priorities: [ 'text/html', '*/*'], fallback_format: html, prefer_extension: true }
+    exception:
+        enabled: true
+
+
+jms_serializer:
+    property_naming:
+        separator:  _
+        lower_case: true
+
+    metadata:
+        cache: file
+        debug: "%kernel.debug%"
+        file_cache:
+            dir: "%kernel.cache_dir%/serializer"
+        directories:
+#            FOSUserBundle:
+#                namespace_prefix: FOS\UserBundle
+#                path: %kernel.root_dir%/config/serializer/FosUserBundle
+#            AppBundle:
+#                namespace_prefix: AppBundle
+#                path: %kernel.root_dir%/serializer/AppBundle
+        auto_detection: true

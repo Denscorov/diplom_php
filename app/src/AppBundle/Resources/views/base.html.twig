@@ -37,19 +37,22 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('homepage') }}">Головна</a></li>
-                <li><a href="#">Результати студентів</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('list') }}">Списки</a></li>
+                {% endif %}
                 <li><a href="#">Про нас</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted('ROLE_USER') %}
-                    <li class="active"><a href="{{ path('fos_user_security_logout') }}"> Вихід</a></li>
+                    <li class="active"><a href="{{ path('fos_user_security_logout') }}">Вихід</a></li>
+                {% else %}
+                    <li class="active"><a href="{{ path('fos_user_security_login') }}">Вхід</a></li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
-
 
 {% block content %}
 {% endblock %}
