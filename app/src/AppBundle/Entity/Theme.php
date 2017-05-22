@@ -38,7 +38,7 @@ class Theme
     /**
      * @ORM\ManyToOne(targetEntity="Module", inversedBy="themes")
      * @ORM\JoinColumn(name="module_id", referencedColumnName="id")
-     *
+     * @JMS\Expose
      */
     private $module;
 

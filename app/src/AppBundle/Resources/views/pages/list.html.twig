@@ -16,18 +16,19 @@
             padding: 15px 10px;
             margin: 5px 0;
             border: 1px solid #414141;
+            position: relative;
             /*background: #eee;*/
         }
 
-        ul[level="1"] li{
+        ul[level="1"] li {
             background: #eee;
         }
 
-        ul[level="2"] li{
+        ul[level="2"] li {
             background: #ddd;
         }
 
-        ul[level="3"] li{
+        ul[level="3"] li {
             background: #ccc;
         }
 
@@ -45,6 +46,36 @@
             color: #414141;
             padding: 10px 15px;
             margin: 5px;
+        }
+
+        .delete, .edit {
+            background: transparent;
+            border: none;
+            position: absolute;
+
+            width: 20px;
+            height: 20px;
+            padding: 0;
+        }
+
+        ul.list .delete {
+            right: 10px;
+            top: 10px;
+        }
+
+        ul.list .delete:hover {
+            background: #960817;
+            color: #fff;
+        }
+
+        ul.list .edit {
+            right: 35px;
+            top: 10px;
+        }
+
+        ul.list .edit:hover {
+            background: #967b1f;
+            color: #fff;
         }
 
     </style>
@@ -70,8 +101,6 @@
     <!-- Modal -->
     <div id="course" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -89,7 +118,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
                 </div>
             </div>
 
@@ -99,8 +128,6 @@
     <!-- Modal -->
     <div id="module" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -120,7 +147,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
                 </div>
             </div>
 
@@ -130,8 +157,6 @@
     <!-- Modal -->
     <div id="theme" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -151,7 +176,93 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {#*******************************************************************#}
+
+    <!-- Modal -->
+    <div id="course_edit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Редагувати курс</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="course_form">
+                                <label for="course_name">Назва</label>
+                                <input type="text" name="name" id="course_name_edit">
+                                <input type="submit" id="course_sub_edit" value="Зберегти">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="module_edit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Редагувати модуль</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="module_form">
+                                <label for="module_name">Назва</label>
+                                <input type="text" name="name" id="module_name_edit">
+                                <label for="module_course">Курс</label>
+                                <select name="course" id="module_course_edit"></select>
+                                <input type="submit" value="Зберегти" id="module_sub_edit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="theme_edit" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Редагувати Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#" class="theme_form">
+                                <label for="theme_name">Назва</label>
+                                <input type="text" name="name" id="theme_name_edit">
+                                <label for="theme_module">Модуль</label>
+                                <select name="module" id="theme_module_edit"></select>
+                                <input type="submit" value="Зберегти" id="theme_sub_edit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
                 </div>
             </div>
 
@@ -162,65 +273,93 @@
 {% block js %}
     <script>
         $(function () {
+//маршрут для завантаження списку
             var url = "{{ path('get_courses') }}";
             var ulL1 = $('ul.list');
+//змінна яка містить список після завантаження
             var array = [];
 
             updateArray();
-
+//завантаження даних для генерації списку
             function updateArray() {
                 $.getJSON(url, function (data) {
                     generateList(data);
                     array = data;
                 });
-                generateList(array);
             }
-
+//генерація списку ul>li...
             function generateList(data) {
+                $('button.add#add_module, button.add#add_theme').attr('disabled','disable');
                 $(ulL1).empty();
                 $(ulL1).attr('level', 1);
-                $.each(data, function (key, val) {
-                    var liL1 = document.createElement('li');
-                    $(liL1).text("Курс: " + val.name);
-                    $(liL1).attr('obj_id', val.id);
-                    $(liL1).attr('obj_type', 'courses');
-                    if (val.modules.length > 0) {
-                        var ulL2 = document.createElement('ul');
-                        $(ulL2).attr('level', 2);
-                        $.each(val.modules, function (key, val) {
-                            var liL2 = document.createElement('li');
-                            $(liL2).text("Модуль: " + val.name);
-                            $(liL2).attr('obj_id', val.id);
-                            $(liL2).attr('obj_type', 'modules');
-                            if (val.themes.length > 0) {
-                                var ulL3 = document.createElement('ul');
-                                $(ulL3).attr('level', 3);
-                                $.each(val.themes, function (key, val) {
-                                    var liL3 = document.createElement('li');
-                                    $(liL3).text("Тема: " + val.name);
-                                    $(liL3).attr('obj_id', val.id);
-                                    $(liL3).attr('obj_type', 'themes');
-                                    ulL3.append(liL3);
-                                });
-                                $(liL2).append(ulL3);
-                            }
-                            $(ulL2).append(liL2);
-                        });
-                        $(liL1).append(ulL2);
-                    }
-                    $(ulL1).append(liL1);
-                });
+                if(data.length > 0) {
+                    $('button.add#add_module').attr('disabled',false);
+                    $.each(data, function (key, val) {
+                        var btn_del = document.createElement('button');
+                        $(btn_del).addClass('delete course glyphicon glyphicon-remove');
+                        $(btn_del).attr('type', 'button');
+                        var btn_edit = document.createElement('button');
+                        $(btn_edit).addClass('edit course glyphicon glyphicon-pencil');
+                        $(btn_edit).attr('type', 'button');
+                        var liL1 = document.createElement('li');
+                        $(liL1).text("Курс: " + val.name);
+                        $(liL1).attr('obj_id', val.id);
+                        $(liL1).attr('obj_type', 'course');
+                        $(liL1).append(btn_edit);
+                        $(liL1).append(btn_del);
+                        if (val.modules.length > 0) {
+                            $('button.add#add_theme').attr('disabled',false);
+                            var ulL2 = document.createElement('ul');
+                            $(ulL2).attr('level', 2);
+                            $.each(val.modules, function (key, val) {
+                                var btn_del = document.createElement('button');
+                                $(btn_del).addClass('delete module glyphicon glyphicon-remove');
+                                var btn_edit = document.createElement('button');
+                                $(btn_edit).addClass('edit module glyphicon glyphicon-pencil');
+                                var liL2 = document.createElement('li');
+                                $(liL2).text("Модуль: " + val.name);
+                                $(liL2).attr('obj_id', val.id);
+                                $(liL2).attr('obj_type', 'module');
+                                $(liL2).append(btn_edit);
+                                $(liL2).append(btn_del);
+                                if (val.themes.length > 0) {
+                                    var ulL3 = document.createElement('ul');
+                                    $(ulL3).attr('level', 3);
+                                    $.each(val.themes, function (key, val) {
+                                        var btn_del = document.createElement('button');
+                                        $(btn_del).addClass('delete theme glyphicon glyphicon-remove');
+                                        var btn_edit = document.createElement('button');
+                                        $(btn_edit).addClass('edit theme glyphicon glyphicon-pencil');
+                                        var liL3 = document.createElement('li');
+                                        $(liL3).text("Тема: " + val.name);
+                                        $(liL3).attr('obj_id', val.id);
+                                        $(liL3).attr('obj_type', 'theme');
+                                        $(liL3).append(btn_edit);
+                                        $(liL3).append(btn_del);
+                                        ulL3.append(liL3);
+                                    });
+                                    $(liL2).append(ulL3);
+                                }
+                                $(ulL2).append(liL2);
+                            });
+                            $(liL1).append(ulL2);
+                        }
+                        $(ulL1).append(liL1);
+                    });
+                }else{
+                    $('button.add#add_module, button.add#add_theme').attr('disabled',true)
+                }
             }
-
+//оновлення списку після закриття будь якого модального вікна
             $('.modal').on('hidden.bs.modal', function (e) {
                 updateArray();
             });
-
+//кнопки збереження нових записів
             $('#course_sub').click(function (e) {
 
                 e.preventDefault();
 
-                var array = $('.course_form').serializeArray();
+                var array = $('#course .course_form').serializeArray();
                 $.ajax({
                     type: "POST",
                     url: "{{ path('post_course') }}",
@@ -231,26 +370,11 @@
                     },
                     dataType: "json"
                 });
-
-
-            });
-
-            $('#module').on('show.bs.modal', function (e) {
-                $('#module_course').empty();
-                $.getJSON("{{ path('get_courses') }}",function (data) {
-                    $.each(data, function (i, item) {
-                        $('#module_course').append($('<option>', {
-                            value: item.id,
-                            text : item.name
-                        }));
-                    });
-                });
-
             });
 
             $('#module_sub').click(function (e) {
-               e.preventDefault();
-               var array = $('.module_form').serializeArray();
+                e.preventDefault();
+                var array = $('#module form.module_form').serializeArray();
                 $.ajax({
                     type: "POST",
                     url: "{{ path('post_module') }}",
@@ -263,39 +387,153 @@
                 });
             });
 
-            $('#theme').on('show.bs.modal', function (e) {
-                $('#theme_module').empty();
-                $.getJSON("{{ path('get_modules') }}",function (data) {
+            $('#theme_sub').click(function (e) {
+                e.preventDefault();
+
+                var array = $('#theme form.theme_form').serializeArray();
+
+                query("{{ path('post_theme') }}", "POST", function (data) {
+                    $('#theme').modal('hide');
+                    reset();
+                }, array);
+            });
+//завантаження селектів після відкриття модальних вікон
+            $('#module').on('show.bs.modal', function (e) {
+                $('#module_course').empty();
+                $.getJSON("{{ path('get_courses') }}", function (data) {
                     $.each(data, function (i, item) {
-                        $('#theme_module').append($('<option>', {
+                        $('#module_course').append($('<option>', {
                             value: item.id,
-                            text : item.name
+                            text: item.name
                         }));
                     });
                 });
-
             });
 
-            $('#theme_sub').click(function (e) {
-               e.preventDefault();
-
-               var array = $('.theme_form').serializeArray();
-                $.ajax({
-                    type: "POST",
-                    url: "{{ path('post_theme') }}",
-                    data: array,
-                    success: function (data) {
-                        $('#theme').modal('hide');
-                        reset();
-                    },
-                    dataType: "json"
+            $('#theme').on('show.bs.modal', function (e) {
+                $('#theme_module').empty();
+                $.getJSON("{{ path('get_modules') }}", function (data) {
+                    $.each(data, function (i, item) {
+                        $('#theme_module').append($('<option>', {
+                            value: item.id,
+                            text: item.name
+                        }));
+                    });
                 });
             });
 
+//очищщення форм після створення обєктів
             function reset() {
                 $('input[type="text"]').val("");
             }
+//блок видалення
+            $(document).on('click', 'button.delete.course', function () {
+                var id = $(this).parent().attr('obj_id');
+                var url = '/api/courses/' + id;
+                query(url, 'DELETE', function (e) {
+                    updateArray();
+                }, null)
+            });
 
+            $(document).on('click', 'button.delete.module', function () {
+                var id = $(this).parent().attr('obj_id');
+                var url = '/api/modules/' + id;
+                query(url, 'DELETE', function (e) {
+                    updateArray();
+                }, null)
+            });
+
+            $(document).on('click', 'button.delete.theme', function () {
+                var id = $(this).parent().attr('obj_id');
+                var url = '/api/themes/' + id;
+                query(url, 'DELETE', function (e) {
+                    updateArray();
+                }, null)
+            });
+//для збереження ід обєкта який редагувається
+            var old_edit_id;
+//блок редагування
+            $(document).on('click', 'button.edit', function () {
+                var type = $(this).parent().attr('obj_type'),
+                    id = $(this).parent().attr('obj_id');
+                old_edit_id = id;
+                if (type == 'course') {
+                    $('#course_edit').modal('show');
+                    query('/api/courses/' + id, "GET", function (data) {
+                        $('#course_edit form #course_name_edit').val(data.name);
+                    }, null);
+                }
+                if (type == 'module') {
+                    $('#module_edit').modal('show');
+                    query('/api/modules/' + id, "GET", function (data) {
+                        $('#module_edit form #module_name_edit').val(data.name);
+                        $('#module_course_edit').empty();
+                        $.getJSON("{{ path('get_courses') }}", function (data1) {
+                            $.each(data1, function (i, item) {
+                                $('#module_course_edit').append($('<option>', {
+                                    value: item.id,
+                                    text: item.name
+                                }));
+                            });
+                            $('#module_edit form #module_course_edit').val(data.course.id);
+                        });
+                    }, null);
+                }
+                if (type == 'theme') {
+                    $('#theme_edit').modal('show');
+                    query('/api/themes/' + id, "GET", function (data) {
+                        $('#theme_edit form #theme_name_edit').val(data.name);
+                        $('#theme_module_edit').empty();
+                        $.getJSON("{{ path('get_modules') }}", function (data1) {
+                            $.each(data1, function (i, item) {
+                                $('#theme_module_edit').append($('<option>', {
+                                    value: item.id,
+                                    text: item.name
+                                }));
+                            });
+                            $('#theme_edit form #theme_module_edit').val(data.module.id);
+                        });
+                    }, null);
+                }
+            });
+
+            $('#course_sub_edit').click(function (e) {
+                e.preventDefault();
+                query('/api/courses/' + old_edit_id, "PUT", function (data) {
+                    $('#course_edit').modal('hide');
+                    updateArray();
+                }, $('#course_edit form').serializeArray());
+            });
+
+            $('#module_sub_edit').click(function (e) {
+                e.preventDefault();
+                query('/api/modules/' + old_edit_id, "PUT", function (data) {
+                    $('#module_edit').modal('hide');
+                    updateArray();
+                }, $('#module_edit form').serializeArray());
+            });
+
+            $('#theme_sub_edit').click(function (e) {
+                e.preventDefault();
+                query('/api/themes/' + old_edit_id, "PUT", function (data) {
+                    $('#theme_edit').modal('hide');
+                    updateArray();
+                }, $('#theme_edit form').serializeArray());
+            });
+
+//відправк запитів
+            function query(url, type, success, data) {
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: data,
+                    success: success,
+                    dataType: "json",
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+            }
         })
     </script>
 {% endblock %}
