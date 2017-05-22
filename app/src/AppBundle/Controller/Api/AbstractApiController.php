@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * Abstract Api Controller.
  *
@@ -47,6 +47,7 @@ abstract class AbstractApiController extends FOSRestController
      * @param ParamFetcherInterface $paramFetcher param fetcher service
      *
      * @return array
+     *
      */
     public function cgetAction(Request $request/*, ParamFetcherInterface $paramFetcher*/)
     {
@@ -92,6 +93,7 @@ abstract class AbstractApiController extends FOSRestController
      * @return FormTypeInterface|View
      *
      * @throws BadRequestHttpException
+     * @Security("has_role('ROLE_USER')")
      */
     public function postAction(Request $request)
     {
@@ -124,6 +126,7 @@ abstract class AbstractApiController extends FOSRestController
      *
      * @throws NotFoundHttpException
      * @throws BadRequestHttpException
+     * @Security("has_role('ROLE_USER')")
      */
     public function putAction($id, Request $request)
     {
@@ -159,6 +162,7 @@ abstract class AbstractApiController extends FOSRestController
      * @View()
      *
      * @throws NotFoundHttpException
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction($id)
     {

@@ -18,7 +18,7 @@ use FOS\RestBundle\Controller\Annotations\RouteResource;
  * @package AppBundle\Controller\Api
  * @RouteResource("test")
  */
-class StudentController extends AbstractApiController
+class TestController extends AbstractApiController
 {
     public $entity = 'AppBundle:Test';
     public $entityClass = TestType::class;

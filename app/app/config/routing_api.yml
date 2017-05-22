@@ -17,3 +17,11 @@ question_api:
 answer_api:
     type: rest
     resource: AppBundle\Controller\Api\AnswerController
+
+test_api:
+    type: rest
+    resource: AppBundle\Controller\Api\TestController
+
+student_api:
+    type: rest
+    resource: AppBundle\Controller\Api\StudentController

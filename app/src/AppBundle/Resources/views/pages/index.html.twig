@@ -3,6 +3,55 @@
 {% block css %}
     {#<link rel="stylesheet" href="{{ asset('/bundles/app/jqwidgets/styles/jqx.base.css') }}">#}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
+    <style>
+
+        ul.list, ul.list ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: block;
+        }
+
+        ul.list li {
+            display: block;
+            width: 100%;
+            padding: 15px 10px;
+            margin: 5px 0;
+            border: 1px solid #414141;
+            position: relative;
+        }
+
+        ul[level="1"] li {
+            background: #eee;
+        }
+
+        ul[level="2"] li {
+            background: #ddd;
+        }
+
+        ul[level="3"] li {
+            background: #ccc;
+        }
+
+        ul[level="2"] li:hover {
+            background: #ddd;
+        }
+
+        ul.list .online{
+            color: #1F811F;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+        ul.list .offline{
+            color: #960817;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+
+
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -10,9 +59,9 @@
         <div class="row">
             {% if is_granted('ROLE_USER') %}
                 <div class="col-md-12">
-                    <div class="btn-group" role="group">
+                    <ul class="list">
 
-                    </div>
+                    </ul>
                 </div>
             {% else %}
                 <div class="col-md-12">
@@ -24,13 +73,58 @@
 {% endblock %}
 
 {% block js %}
-
     <script>
         $(function () {
+            {% if is_granted('ROLE_USER') %}
+            $(window).load(function (e) {
+                loadList();
+            });
+            {% endif %}
 
+            var students = [],
+                url = '{{ path('get_students') }}';
 
+            function loadList() {
+                $.getJSON(url, function (data) {
+                    students = data;
+                    generateList(students);
+                });
+            }
+
+            function generateList(data) {
+                var list = $('ul.list');
+                $(list).empty();
+                if (data.length > 0) {
+                    $.each(data, function (key, val) {
+                        var liL1 = document.createElement('li');
+                        $(liL1).text(val.last_name + ' ' + val.first_name);
+                        $(liL1).attr('obj_id', val.id);
+                        var span = document.createElement('span');
+                        if (val.is_active) {
+                            $(span).addClass('online glyphicon glyphicon-ok');
+                        } else {
+                            $(span).addClass('offline glyphicon glyphicon-remove');
+                        }
+                        $(liL1).append(span);
+                        if (val.tests.length > 0) {
+                            var ulL2 = document.createElement('ul');
+                            $(ulL2).attr('level', 2);
+                            $.each(val.tests, function (key, val) {
+                                var liL2 = document.createElement('li');
+                                $(liL2).text("Тест: " + val.description + ' Питань:' + val.q_count + ' Вірних:' + val.q_t_count);
+                                $(liL2).attr('obj_id', val.id);
+                                $(ulL2).append(liL2);
+                            });
+                            $(liL1).append(ulL2);
+                        }
+                        $(list).append(liL1);
+                    });
+
+                } else {
+
+                }
+            }
 
         })
     </script>
-    {#{% endspaceless %}#}
 {% endblock %}

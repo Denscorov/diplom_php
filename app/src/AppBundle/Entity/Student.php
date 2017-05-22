@@ -2,20 +2,16 @@
 
 namespace AppBundle\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Student
- * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"read"}},
- *     "denormalization_context"={"groups"={"write"}}
- * })
  *
  * @ORM\Table(name="student")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StudentRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Student
 {
@@ -25,7 +21,7 @@ class Student
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
+     * @JMS\Expose
      */
     private $id;
 
@@ -33,7 +29,7 @@ class Student
      * @var string
      *
      * @ORM\Column(name="FirstName", type="string", length=255)
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $firstName;
 
@@ -41,23 +37,14 @@ class Student
      * @var string
      *
      * @ORM\Column(name="LastName", type="string", length=255)
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $lastName;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="Birthday", type="date")
-     * @Groups({"read","write"})
-     */
-    private $birthday;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="Login", type="string", length=255)
-     * @Groups({"read","write"})
+     * @ORM\Column(name="Login", type="string", length=255, unique=true)
      */
     private $login;
 
@@ -65,7 +52,6 @@ class Student
      * @var string
      *
      * @ORM\Column(name="Password", type="string", length=255)
-     * @Groups({"write"})
      */
     private $password;
 
@@ -73,14 +59,14 @@ class Student
      * @var string
      *
      * @ORM\Column(name="is_active", type="boolean")
-     * @Groups({"read","write"})
+     * @JMS\Expose
      */
     private $is_active;
 
     /**
      * One Product has Many Features.
-     * @ORM\OneToMany(targetEntity="Test", mappedBy="student")
-     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="student", cascade={"persist", "remove"})
+     * @JMS\Expose
      */
     private $tests;
 
@@ -88,7 +74,7 @@ class Student
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="User", inversedBy="students")
      * @ORM\JoinColumn(name="teacher_id", referencedColumnName="id")
-     * @Groups({"read"})
+     *
      */
     private $teacher;
 
@@ -154,30 +140,6 @@ class Student
     public function getLastName()
     {
         return $this->lastName;
-    }
-
-    /**
-     * Set birthday
-     *
-     * @param \DateTime $birthday
-     *
-     * @return Student
-     */
-    public function setBirthday($birthday)
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    /**
-     * Get birthday
-     *
-     * @return \DateTime
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
     }
 
     /**
