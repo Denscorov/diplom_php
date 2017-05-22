@@ -1,7 +1,6 @@
 <?php
 
 namespace AppBundle\Repository;
-
 /**
  * QuestionRepository
  *
@@ -12,10 +11,12 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function getQuestionByThemeId($id){
-        $this->createQueryBuilder('q')
-            ->where('q.theme_id = :theme_id')
-            ->setParameter('theme_id',$id)
-            ->getQuery()->getResult();
+        return $this->createQueryBuilder('q')
+            ->where('q.theme = :theme_id')
+            ->setParameter('theme_id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
 }

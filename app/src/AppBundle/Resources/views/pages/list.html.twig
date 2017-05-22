@@ -42,13 +42,13 @@
 
         .add {
             border: 1px solid #414141;
-            background: #eee;
-            color: #414141;
+            /*background: #eee;*/
+            /*color: #414141;*/
             padding: 10px 15px;
             margin: 5px;
         }
 
-        .delete, .edit {
+        .delete, .edit, .question {
             background: transparent;
             border: none;
             position: absolute;
@@ -78,6 +78,16 @@
             color: #fff;
         }
 
+        ul.list .question {
+            right: 60px;
+            top: 10px;
+        }
+
+        ul.list .question:hover {
+            background: #249618;
+            color: #fff;
+        }
+
     </style>
 {% endblock %}
 
@@ -85,14 +95,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <button class="add" id="add_course" data-toggle="modal" data-target="#course">Добавити курс</button>
-                <button class="add" id="add_module" data-toggle="modal" data-target="#module">Добавити модуль</button>
-                <button class="add" id="add_theme" data-toggle="modal" data-target="#theme">Добавити тему</button>
+                <button class="add btn btn-info" id="add_course" data-toggle="modal" data-target="#course">Добавити
+                    курс
+                </button>
+                <button class="add btn btn-info" id="add_module" data-toggle="modal" data-target="#module">Добавити
+                    модуль
+                </button>
+                <button class="add btn btn-info" id="add_theme" data-toggle="modal" data-target="#theme">Добавити тему
+                </button>
+                <hr>
             </div>
 
             <div class="col-md-12">
                 <ul class="list">
-
                 </ul>
             </div>
         </div>
@@ -246,7 +261,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Редагувати Header</h4>
+                    <h4 class="modal-title">Редагувати тему</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -268,18 +283,135 @@
 
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div id="question_list" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Список питань</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="q_add btn btn-success">Додати</button>
+                        </div>
+                        <div class="col-md-12">
+
+                            <ul class="question_list"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="question_add" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Додати питаня</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="q_text">Текст</label>
+                                    <input type="text" name="text" class="form-control" id="q_text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="q_type">Тип</label>
+                                    <select name="type" class="form-control" id="q_type">
+                                        <option value="0">З багатьма відповідями</option>
+                                        <option value="1">З однією відповіддю</option>
+                                        <option value="2">Відповідь вписується</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="q_level">Рівень складності</label>
+                                    <select name="level" class="form-control" id="q_level">
+                                        <option value="0">Екстернат</option>
+                                        <option value="1">Заочники</option>
+                                        <option value="2">Заочники та стаціонар</option>
+                                        <option value="3">Стаціонар</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="theme" id="q_theme">
+                                    <input type="submit" value="Зберегти" class="form-control" id="q_sub">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="answer" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Додати питаня</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="q_text">Текст</label>
+                                    <input type="text" name="text" class="form-control" id="a_text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="q_type">Вірність</label>
+                                    <input type="checkbox" name="corect" id="a_corect">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="hidden" name="question" id="a_question">
+                                    <input type="submit" value="Зберегти" class="form-control" id="a_sub">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
 
 {% block js %}
     <script>
-        $(function () {
+        $(document).ready(function () {
 //маршрут для завантаження списку
             var url = "{{ path('get_courses') }}";
             var ulL1 = $('ul.list');
 //змінна яка містить список після завантаження
             var array = [];
-
+//            $(window).load(function () {
             updateArray();
+//            });
 //завантаження даних для генерації списку
             function updateArray() {
                 $.getJSON(url, function (data) {
@@ -287,13 +419,14 @@
                     array = data;
                 });
             }
+
 //генерація списку ul>li...
             function generateList(data) {
-                $('button.add#add_module, button.add#add_theme').attr('disabled','disable');
+                $('button.add#add_module, button.add#add_theme').attr('disabled', 'disable');
                 $(ulL1).empty();
                 $(ulL1).attr('level', 1);
-                if(data.length > 0) {
-                    $('button.add#add_module').attr('disabled',false);
+                if (data.length > 0) {
+                    $('button.add#add_module').attr('disabled', false);
                     $.each(data, function (key, val) {
                         var btn_del = document.createElement('button');
                         $(btn_del).addClass('delete course glyphicon glyphicon-remove');
@@ -308,7 +441,7 @@
                         $(liL1).append(btn_edit);
                         $(liL1).append(btn_del);
                         if (val.modules.length > 0) {
-                            $('button.add#add_theme').attr('disabled',false);
+                            $('button.add#add_theme').attr('disabled', false);
                             var ulL2 = document.createElement('ul');
                             $(ulL2).attr('level', 2);
                             $.each(val.modules, function (key, val) {
@@ -330,11 +463,14 @@
                                         $(btn_del).addClass('delete theme glyphicon glyphicon-remove');
                                         var btn_edit = document.createElement('button');
                                         $(btn_edit).addClass('edit theme glyphicon glyphicon-pencil');
+                                        var btn_q = document.createElement('button');
+                                        $(btn_q).addClass('question theme glyphicon glyphicon-share');
                                         var liL3 = document.createElement('li');
                                         $(liL3).text("Тема: " + val.name);
                                         $(liL3).attr('obj_id', val.id);
                                         $(liL3).attr('obj_type', 'theme');
                                         $(liL3).append(btn_edit);
+                                        $(liL3).append(btn_q);
                                         $(liL3).append(btn_del);
                                         ulL3.append(liL3);
                                     });
@@ -346,10 +482,11 @@
                         }
                         $(ulL1).append(liL1);
                     });
-                }else{
-                    $('button.add#add_module, button.add#add_theme').attr('disabled',true)
+                } else {
+                    $('button.add#add_module, button.add#add_theme').attr('disabled', true)
                 }
             }
+
 //оновлення списку після закриття будь якого модального вікна
             $('.modal').on('hidden.bs.modal', function (e) {
                 updateArray();
@@ -426,6 +563,7 @@
             function reset() {
                 $('input[type="text"]').val("");
             }
+
 //блок видалення
             $(document).on('click', 'button.delete.course', function () {
                 var id = $(this).parent().attr('obj_id');
@@ -520,7 +658,79 @@
                     updateArray();
                 }, $('#theme_edit form').serializeArray());
             });
+//робота з питаннями
 
+            var questions = [];
+            var theme_id;
+            $(document).on('click', 'button.question.theme', function () {
+                theme_id = $(this).parent().attr('obj_id');
+                $('#question_list').modal('show');
+                questionUpdate();
+            });
+
+            function questionUpdate() {
+                $('#question_list .question_list').empty();
+                var url = '/api/questions/' + theme_id + '/theme';
+                query(url, 'GET', function (data) {
+                    questions = data;
+                    $.each(data, function (key, val) {
+                        var btn = document.createElement('button');
+                        $(btn).addClass('delete-q glyphicon glyphicon-remove');
+                        var btn_add = document.createElement('button');
+                        $(btn_add).addClass('add-a glyphicon glyphicon-plus-sign');
+                        var li = document.createElement('li');
+                        $(li).text(val.text+ ' Відповідей: '+val.answers.length);
+                        $(li).attr('obj_id', val.id);
+                        $(li).append(btn_add);
+                        $(li).append(btn);
+                        $('#question_list .question_list').append(li);
+                    });
+                }, null)
+            }
+
+            $(document).on('click', '#question_list .delete-q',function (e) {
+                var id = $(this).parent().attr('obj_id');
+                query('/api/questions/'+id,'DELETE',function (e) {
+                    console.log('question delete success');
+                },null);
+                questionUpdate();
+            });
+
+            $('#question_list .q_add').click(function (e) {
+                $('#question_add').modal('show');
+                $('#question_add #q_theme').val(theme_id);
+            });
+
+            $('#question_add #q_sub').click(function (e) {
+                e.preventDefault();
+                var question = $('#question_add form').serializeArray();
+                query('/api/questions', 'POST', function (data) {
+                    $('#question_add').modal('hide');
+                    $('#question_list .question_list').empty();
+                    questionUpdate();
+                }, question);
+            });
+
+            $('#question_list').on('hidden.bs.modal', function (e) {
+                $('#question_list .question_list').empty();
+                questions = [];
+                theme_id = 0;
+            });
+
+            $(document).on('click','#question_list .add-a',function (e) {
+                $('#answer').modal('show');
+                $('#answer #a_question').val($(this).parent().attr('obj_id'));
+            });
+
+            $('#answer #a_sub').click(function (e) {
+                e.preventDefault();
+                var ans = {text:$('#answer form #a_text').val(),corect:$('#answer form #a_corect').is(":checked") == true?1:0,'question':$('#answer form #a_question').val()};
+                console.log(ans);
+                query('/api/answers','POST',function (data) {
+                    $('#answer').modal('hide');
+                    questionUpdate();
+                }, ans);
+            });
 //відправк запитів
             function query(url, type, success, data) {
                 $.ajax({

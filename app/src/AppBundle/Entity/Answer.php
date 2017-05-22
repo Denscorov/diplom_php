@@ -24,7 +24,7 @@ class Answer
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
+     *
      */
     private $id;
 
@@ -40,8 +40,7 @@ class Answer
     /**
      * @var bool
      *
-     * @ORM\Column(name="Corect", type="boolean")
-     * @Groups({"read","write"})
+     * @ORM\Column(name="Corect", type="integer")
      * @Assert\NotBlank()
      */
     private $corect;

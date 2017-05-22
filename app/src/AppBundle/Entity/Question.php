@@ -56,7 +56,6 @@ class Question
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Theme", inversedBy="questions")
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
-     *
      */
     private $theme;
 

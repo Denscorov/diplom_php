@@ -56,9 +56,6 @@ abstract class AbstractApiController extends FOSRestController
         $limit = null == $limit ? 100 : $limit;
         return $objects = $this->get('doctrine')->getManager()->getRepository($this->entity)
             ->findBy(array()/* $criteria */, null /* $orderBy */, $limit, $offset);
-//        $view = $this->view($objects,Response::HTTP_OK);
-//        SerializationContext::create()->enableMaxDepthChecks();
-//        return $this->handleView($view);
     }
 
     /**
@@ -98,7 +95,6 @@ abstract class AbstractApiController extends FOSRestController
      */
     public function postAction(Request $request)
     {
-
         $object = new $this->entityClass();
 
         $form = $this->createForm($this->formClass, $object, array('method' => 'POST',));

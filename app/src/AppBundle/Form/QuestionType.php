@@ -13,16 +13,17 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text')->add('type')->add('level')->add('theme')->add('equivalentWithMe')->add('myEquivalent');
+        $builder->add('text')->add('type')->add('level')->add('theme')->add('equivalentWithMe')->add('myEquivalent')->add('answers');
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Question'
+            'data_class' => 'AppBundle\Entity\Question',
+            'csrf_protection' => false,
         ));
     }
 
