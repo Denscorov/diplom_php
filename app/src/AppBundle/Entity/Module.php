@@ -38,7 +38,7 @@ class Module
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="modules", cascade={"persist"})
      * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
-     * @JMS\Expose
+     * 
      */
     private $course;
 

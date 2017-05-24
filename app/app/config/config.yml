@@ -145,7 +145,7 @@ fos_rest:
 
 jms_serializer:
     property_naming:
-        separator:  _
+        separator:  ~
         lower_case: true
 
     metadata:

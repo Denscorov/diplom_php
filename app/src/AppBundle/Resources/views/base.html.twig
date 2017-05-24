@@ -39,8 +39,7 @@
                 <li><a href="{{ path('homepage') }}">Головна</a></li>
                 {% if is_granted('ROLE_USER') %}
                     <li><a href="{{ path('list') }}">Списки</a></li>
-                {% endif %}
-                <li><a href="#">Про нас</a></li>
+                {% endif %}              
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -48,6 +47,7 @@
                     <li class="active"><a href="{{ path('fos_user_security_logout') }}">Вихід</a></li>
                 {% else %}
                     <li class="active"><a href="{{ path('fos_user_security_login') }}">Вхід</a></li>
+                    <li class="active"><a href="{{ path('fos_user_registration_register') }}">Реєстрація</a></li>
                 {% endif %}
             </ul>
         </div>

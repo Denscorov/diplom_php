@@ -38,13 +38,14 @@ class Theme
     /**
      * @ORM\ManyToOne(targetEntity="Module", inversedBy="themes")
      * @ORM\JoinColumn(name="module_id", referencedColumnName="id")
-     * @JMS\Expose
+     * 
      */
     private $module;
 
     /**
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Question", mappedBy="theme", cascade={"remove"})
+     * @JMS\Expose
      *
      */
     private $questions;
