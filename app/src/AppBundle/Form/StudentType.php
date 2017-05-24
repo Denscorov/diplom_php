@@ -13,9 +13,14 @@ class StudentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstName')->add('lastName')->add('login')->add('password')->add('is_active');
+        $builder
+            ->add('first_name')
+            ->add('last_name')
+            ->add('login')
+            ->add('password')
+            ->add('is_active');
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -24,6 +29,7 @@ class StudentType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Student',
             'csrf_protection' => false,
+//            'allow_extra_fields' => true
         ));
     }
 

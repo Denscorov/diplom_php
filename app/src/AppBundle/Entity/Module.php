@@ -104,22 +104,6 @@ class Module
         $this->course = $course;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getThemes()
-//    {
-//        return $this->themes;
-//    }
-//
-//    /**
-//     * @param mixed $themes
-//     */
-//    public function setThemes($themes)
-//    {
-//        $this->themes = $themes;
-//    }
-
     public function addTheme($theme){
         $theme->setModule($this);
         $this->themes->add($theme);

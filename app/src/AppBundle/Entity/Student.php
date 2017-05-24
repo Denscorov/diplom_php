@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Student
@@ -28,30 +29,34 @@ class Student
     /**
      * @var string
      *
-     * @ORM\Column(name="FirstName", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255)
      * @JMS\Expose
+     *
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="LastName", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255)
      * @JMS\Expose
+     *
      */
     private $lastName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Login", type="string", length=255, unique=true)
+     * @ORM\Column(name="login", type="string", length=255, unique=true)
+     * @JMS\Expose
      */
     private $login;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255)
+     * @JMS\Expose
      */
     private $password;
 
@@ -60,6 +65,7 @@ class Student
      *
      * @ORM\Column(name="is_active", type="boolean")
      * @JMS\Expose
+     *
      */
     private $is_active;
 
@@ -193,7 +199,7 @@ class Student
     /**
      * @return string
      */
-    public function getisActive()
+    public function getIsActive()
     {
         return $this->is_active;
     }
@@ -222,12 +228,13 @@ class Student
         $this->tests = $tests;
     }
 
-    public function AddTest($test)
+    public function addTest($test)
     {
+        $test->setStudent($this);
         $this->tests->add($test);
     }
 
-    public function RemoveTest($test)
+    public function removeTest($test)
     {
         $this->tests->remove($test);
     }

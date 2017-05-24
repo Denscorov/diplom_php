@@ -1,10 +1,71 @@
-PHPUnit 5.4.8 by Sebastian Bergmann and contributors.
-
-Testing Project Test Suite
-.                                                                   1 / 1 (100%)
-
-Time: 417 ms, Memory: 22.00MB
-
-[30;42mOK (1 test, 1 assertion)[0m
-[32mOK[0m ./vendor/bin/simple-phpunit
+ ----------------------------------- ---------- -------- ------ ---------------------------------------- 
+  Name                                Method     Scheme   Host   Path                                    
+ ----------------------------------- ---------- -------- ------ ---------------------------------------- 
+  _wdt                                ANY        ANY      ANY    /_wdt/{token}                           
+  _profiler_home                      ANY        ANY      ANY    /_profiler/                             
+  _profiler_search                    ANY        ANY      ANY    /_profiler/search                       
+  _profiler_search_bar                ANY        ANY      ANY    /_profiler/search_bar                   
+  _profiler_info                      ANY        ANY      ANY    /_profiler/info/{about}                 
+  _profiler_phpinfo                   ANY        ANY      ANY    /_profiler/phpinfo                      
+  _profiler_search_results            ANY        ANY      ANY    /_profiler/{token}/search/results       
+  _profiler_open_file                 ANY        ANY      ANY    /_profiler/open                         
+  _profiler                           ANY        ANY      ANY    /_profiler/{token}                      
+  _profiler_router                    ANY        ANY      ANY    /_profiler/{token}/router               
+  _profiler_exception                 ANY        ANY      ANY    /_profiler/{token}/exception            
+  _profiler_exception_css             ANY        ANY      ANY    /_profiler/{token}/exception.css        
+  _twig_error_test                    ANY        ANY      ANY    /_error/{code}.{_format}                
+  homepage                            ANY        ANY      ANY    /                                       
+  list                                ANY        ANY      ANY    /list                                   
+  fos_user_security_login             GET|POST   ANY      ANY    /login                                  
+  fos_user_security_check             POST       ANY      ANY    /login_check                            
+  fos_user_security_logout            GET|POST   ANY      ANY    /logout                                 
+  fos_user_registration_register      GET|POST   ANY      ANY    /register/                              
+  fos_user_registration_check_email   GET        ANY      ANY    /register/check-email                   
+  fos_user_registration_confirm       GET        ANY      ANY    /register/confirm/{token}               
+  fos_user_registration_confirmed     GET        ANY      ANY    /register/confirmed                     
+  fos_user_resetting_request          GET        ANY      ANY    /resetting/request                      
+  fos_user_resetting_send_email       POST       ANY      ANY    /resetting/send-email                   
+  fos_user_resetting_check_email      GET        ANY      ANY    /resetting/check-email                  
+  fos_user_resetting_reset            GET|POST   ANY      ANY    /resetting/reset/{token}                
+  nelmio_api_doc_index                GET        ANY      ANY    /doc/{view}                             
+  get_courses                         GET        ANY      ANY    /api/courses                            
+  get_course                          GET        ANY      ANY    /api/courses/{id}                       
+  post_course                         POST       ANY      ANY    /api/courses                            
+  put_course                          PUT        ANY      ANY    /api/courses/{id}                       
+  delete_course                       DELETE     ANY      ANY    /api/courses/{id}                       
+  get_modules                         GET        ANY      ANY    /api/modules                            
+  get_module                          GET        ANY      ANY    /api/modules/{id}                       
+  post_module                         POST       ANY      ANY    /api/modules                            
+  put_module                          PUT        ANY      ANY    /api/modules/{id}                       
+  delete_module                       DELETE     ANY      ANY    /api/modules/{id}                       
+  get_themes                          GET        ANY      ANY    /api/themes                             
+  get_theme                           GET        ANY      ANY    /api/themes/{id}                        
+  post_theme                          POST       ANY      ANY    /api/themes                             
+  put_theme                           PUT        ANY      ANY    /api/themes/{id}                        
+  delete_theme                        DELETE     ANY      ANY    /api/themes/{id}                        
+  get_question_theme                  GET        ANY      ANY    /api/questions/{id}/theme               
+  get_questions                       GET        ANY      ANY    /api/questions                          
+  get_question                        GET        ANY      ANY    /api/questions/{id}                     
+  post_question                       POST       ANY      ANY    /api/questions                          
+  put_question                        PUT        ANY      ANY    /api/questions/{id}                     
+  delete_question                     DELETE     ANY      ANY    /api/questions/{id}                     
+  get_answers                         GET        ANY      ANY    /api/answers                            
+  get_answer                          GET        ANY      ANY    /api/answers/{id}                       
+  post_answer                         POST       ANY      ANY    /api/answers                            
+  put_answer                          PUT        ANY      ANY    /api/answers/{id}                       
+  delete_answer                       DELETE     ANY      ANY    /api/answers/{id}                       
+  post_test_array                     POST       ANY      ANY    /api/tests/arrays                       
+  get_tests                           GET        ANY      ANY    /api/tests                              
+  get_test                            GET        ANY      ANY    /api/tests/{id}                         
+  post_test                           POST       ANY      ANY    /api/tests                              
+  put_test                            PUT        ANY      ANY    /api/tests/{id}                         
+  delete_test                         DELETE     ANY      ANY    /api/tests/{id}                         
+  put_student_active                  PUT        ANY      ANY    /api/students/{id}/actives/{is_active}  
+  get_student_auth                    GET        ANY      ANY    /api/students/{login}/auths/{password}  
+  get_students                        GET        ANY      ANY    /api/students                           
+  get_student                         GET        ANY      ANY    /api/students/{id}                      
+  post_student                        POST       ANY      ANY    /api/students                           
+  put_student                         PUT        ANY      ANY    /api/students/{id}                      
+  delete_student                      DELETE     ANY      ANY    /api/students/{id}                      
+ ----------------------------------- ---------- -------- ------ ---------------------------------------- 
 

@@ -12,7 +12,6 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use JMS\Serializer\SerializationContext;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +19,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
  * Abstract Api Controller.
  *
@@ -93,7 +93,7 @@ abstract class AbstractApiController extends FOSRestController
      * @return FormTypeInterface|View
      *
      * @throws BadRequestHttpException
-     * @Security("has_role('ROLE_USER')")
+     *
      */
     public function postAction(Request $request)
     {
@@ -126,29 +126,24 @@ abstract class AbstractApiController extends FOSRestController
      *
      * @throws NotFoundHttpException
      * @throws BadRequestHttpException
-     * @Security("has_role('ROLE_USER')")
+     *
      */
     public function putAction($id, Request $request)
     {
         $object = $this->get('doctrine')->getManager()->getRepository($this->entity)->find($id);
-
         if (!$object) {
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
         }
-
-        $form = $this->createForm($this->formClass, $object, array('method' => 'PUT'));
-        if ($request->getMethod() == 'PUT') {
-            $form->handleRequest($request);
-            $form->submit($request->request->all());
-            if ($form->isValid() && $form->isSubmitted()) {
-                $em = $this->getDoctrine()->getManager();
-                $object = $form->getData();
-                $em->persist($object);
-                $em->flush();
-                return $object;
-            } else {
-                throw new BadRequestHttpException("Bad request");
-            }
+        $form = $this->createForm($this->formClass, $object, array('method' => 'POST',));
+        $form->handleRequest($request);
+        $form->submit($request->request->all());
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($object);
+            $em->flush();
+            return $object;
+        } else {
+            throw new BadRequestHttpException("Bad request");
         }
     }
 
