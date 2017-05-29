@@ -24,7 +24,6 @@ class Test
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"read"})
      */
     private $id;
 
@@ -33,7 +32,6 @@ class Test
      *
      * @ORM\Column(name="Type", type="string", length=255)
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
      */
     private $type;
 
@@ -42,7 +40,6 @@ class Test
      *
      * @ORM\Column(name="Description", type="string", length=255)
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
      */
     private $description;
 
@@ -51,7 +48,6 @@ class Test
      *
      * @ORM\Column(name="QCount", type="integer")
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
      */
     private $qCount;
 
@@ -60,7 +56,6 @@ class Test
      *
      * @ORM\Column(name="QTCount", type="integer")
      * @Assert\NotBlank()
-     * @Groups({"read","write"})
      */
     private $qTCount;
 
@@ -68,9 +63,82 @@ class Test
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Student", inversedBy="tests")
      * @ORM\JoinColumn(name="student_id", referencedColumnName="id")
-     * @Groups({"read","write"})
      */
     private $student;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Date", type="string")
+     * @Assert\NotBlank()
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Time", type="string")
+     * @Assert\NotBlank()
+     */
+    private $time;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Timer", type="string")
+     * @Assert\NotBlank()
+     */
+    private $timer;
+
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param mixed $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTimer()
+    {
+        return $this->timer;
+    }
+
+    /**
+     * @param mixed $timer
+     */
+    public function setTimer($timer)
+    {
+        $this->timer = $timer;
+    }
+
+
 
     /**
      * Get id
