@@ -66,6 +66,67 @@ class Test
      */
     private $student;
 
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="Date", type="string")
+     * @Assert\NotBlank()
+     */
+	private $date;
+
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="Time", type="string")
+     * @Assert\NotBlank()
+     */
+	private $time;
+
+	/**
+     * @var int
+     *
+     * @ORM\Column(name="Timer", type="string")
+     * @Assert\NotBlank()
+     */
+	private $timer;    
+
+	public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+	public function getDate()
+    {
+        return $this->gate;
+    }
+
+	public function setTime($time)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+	public function getTime()
+    {
+        return $this->time;
+    }
+
+	public function setTimer($timer)
+    {
+        $this->timer = $timer;
+
+        return $this;
+    }
+
+	public function getTimer()
+    {
+        return $this->timer;
+    }
+
+
     /**
      * @var string
      *

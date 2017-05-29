@@ -56,6 +56,7 @@ class Question
      * Many Features have One Product.
      * @ORM\ManyToOne(targetEntity="Theme", inversedBy="questions")
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id")
+     * @JMS\Expose
      */
     private $theme;
 
@@ -76,8 +77,8 @@ class Question
      * Many Users have many Users.
      * @ORM\ManyToMany(targetEntity="Question", inversedBy="equivalentWithMe")
      * @ORM\JoinTable(name="equivalentQuestion",
-     *      joinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="equivalent_question_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="questionId", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="myEquivalentId", referencedColumnName="id")}
      *      )
      * @JMS\Expose
      */

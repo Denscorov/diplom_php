@@ -50,7 +50,11 @@ class StudentController extends AbstractApiController
         if (!($object = $this->get('doctrine')->getManager()->getRepository($this->entity)->findBy(['login'=>$login, 'password'=>$password]))) {
             throw new NotFoundHttpException(sprintf('User with login \'%s\' and password \'%s\' was not found.', $login, $password));
         }
-        return $object;
+$object[0]->setIsActive(true);
+$em = $this->getDoctrine()->getManager();
+        $em->persist($object[0]);
+        $em->flush();
+        return $object[0];
     }
 
 
