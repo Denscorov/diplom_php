@@ -129,7 +129,7 @@
                                     <label for="course_name">Назва</label>
                                     <input class="form-control" type="text" name="name" id="course_name">
                                 </div>
-                                <input type="submit" id="course_sub" value="Зберегти">
+                                <input class="btn btn-info" type="submit" id="course_sub" value="Зберегти">
                             </form>
                         </div>
                     </div>
@@ -154,11 +154,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="#" class="module_form">
-                                <label for="module_name">Назва</label>
-                                <input type="text" name="name" id="module_name">
+                                <div class="form-group">
+                                    <label for="module_name">Назва</label>
+                                    <input type="text" name="name" id="module_name" class="form-control">
+                                </div>
                                 <label for="module_course">Курс</label>
-                                <select name="course" id="module_course"></select>
-                                <input type="submit" value="Зберегти" id="module_sub">
+                                <select name="course" id="module_course" class="form-control"></select>
+                                <div class="form-group"></div>
+
+                                <input type="submit" class="btn btn-info" value="Зберегти" id="module_sub">
                             </form>
                         </div>
                     </div>
@@ -183,11 +187,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="#" class="theme_form">
-                                <label for="theme_name">Назва</label>
-                                <input type="text" name="name" id="theme_name">
-                                <label for="theme_module">Модуль</label>
-                                <select name="module" id="theme_module"></select>
-                                <input type="submit" value="Зберегти" id="theme_sub">
+                                <div class="form-group">
+                                    <label for="theme_name">Назва</label>
+                                    <input type="text" name="name" id="theme_name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="theme_module">Модуль</label>
+                                    <select name="module" id="theme_module" class="form-control"></select>
+                                </div>
+                                <input type="submit" value="Зберегти" class="btn btn-info" id="theme_sub">
                             </form>
                         </div>
                     </div>
@@ -213,9 +221,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="#" class="course_form">
-                                <label for="course_name">Назва</label>
-                                <input type="text" name="name" id="course_name_edit">
-                                <input type="submit" id="course_sub_edit" value="Зберегти">
+                                <div class="form-group">
+                                    <label for="course_name">Назва</label>
+                                    <input type="text" name="name" id="course_name_edit" class="form-control">
+                                </div>
+                                <input type="submit" id="course_sub_edit" class="btn btn-info" value="Зберегти">
                             </form>
                         </div>
                     </div>
@@ -240,11 +250,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="#" class="module_form">
+                                <div class="form-group">
                                 <label for="module_name">Назва</label>
-                                <input type="text" name="name" id="module_name_edit">
+                                <input type="text" name="name" id="module_name_edit" class="form-control">
+                                </div>
+                                <div class="form-group">
                                 <label for="module_course">Курс</label>
-                                <select name="course" id="module_course_edit"></select>
-                                <input type="submit" value="Зберегти" id="module_sub_edit">
+                                <select name="course" id="module_course_edit" class="form-control"></select>
+                                </div>
+                                <input type="submit" value="Зберегти" id="module_sub_edit" class="btn btn-info">
                             </form>
                         </div>
                     </div>
@@ -269,11 +283,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="#" class="theme_form">
+                                <div class="form-group">
                                 <label for="theme_name">Назва</label>
-                                <input type="text" name="name" id="theme_name_edit">
+                                <input type="text" name="name" id="theme_name_edit" class="form-control">
+                                </div>
+                                <div class="form-control">
                                 <label for="theme_module">Модуль</label>
-                                <select name="module" id="theme_module_edit"></select>
-                                <input type="submit" value="Зберегти" id="theme_sub_edit">
+                                <select class="form-control" name="module" id="theme_module_edit"></select>
+                                </div>
+                                <input type="submit" value="Зберегти" class="btn btn-info" id="theme_sub_edit">
                             </form>
                         </div>
                     </div>
@@ -301,7 +319,6 @@
                             <button class="q_add btn btn-success">Додати</button>
                         </div>
                         <div class="col-md-12">
-
                             <ul class="question_list"></ul>
                         </div>
                     </div>
