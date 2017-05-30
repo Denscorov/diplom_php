@@ -125,8 +125,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="#" class="course_form">
-                                <label for="course_name">Назва</label>
-                                <input type="text" name="name" id="course_name">
+                                <div class="form-group">
+                                    <label for="course_name">Назва</label>
+                                    <input class="form-control" type="text" name="name" id="course_name">
+                                </div>
                                 <input type="submit" id="course_sub" value="Зберегти">
                             </form>
                         </div>
@@ -679,7 +681,7 @@
                         var btn_add = document.createElement('button');
                         $(btn_add).addClass('add-a glyphicon glyphicon-plus-sign');
                         var li = document.createElement('li');
-                        $(li).text(val.text+ ' Відповідей: '+val.answers.length);
+                        $(li).text(val.text + ' Відповідей: ' + val.answers.length);
                         $(li).attr('obj_id', val.id);
                         $(li).append(btn_add);
                         $(li).append(btn);
@@ -688,11 +690,11 @@
                 }, null)
             }
 
-            $(document).on('click', '#question_list .delete-q',function (e) {
+            $(document).on('click', '#question_list .delete-q', function (e) {
                 var id = $(this).parent().attr('obj_id');
-                query('/api/questions/'+id,'DELETE',function (e) {
+                query('/api/questions/' + id, 'DELETE', function (e) {
                     console.log('question delete success');
-                },null);
+                }, null);
                 questionUpdate();
             });
 
@@ -717,16 +719,20 @@
                 theme_id = 0;
             });
 
-            $(document).on('click','#question_list .add-a',function (e) {
+            $(document).on('click', '#question_list .add-a', function (e) {
                 $('#answer').modal('show');
                 $('#answer #a_question').val($(this).parent().attr('obj_id'));
             });
 
             $('#answer #a_sub').click(function (e) {
                 e.preventDefault();
-                var ans = {text:$('#answer form #a_text').val(),corect:$('#answer form #a_corect').is(":checked") == true?1:0,'question':$('#answer form #a_question').val()};
+                var ans = {
+                    text: $('#answer form #a_text').val(),
+                    corect: $('#answer form #a_corect').is(":checked") == true ? 1 : 0,
+                    'question': $('#answer form #a_question').val()
+                };
                 console.log(ans);
-                query('/api/answers','POST',function (data) {
+                query('/api/answers', 'POST', function (data) {
                     $('#answer').modal('hide');
                     questionUpdate();
                 }, ans);
