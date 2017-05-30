@@ -18,7 +18,9 @@ class StudentType extends AbstractType
             ->add('last_name')
             ->add('login')
             ->add('password')
-            ->add('is_active');
+            ->add('is_active')
+            ->add('teacher')
+        ;
     }
 
     /**

@@ -37,13 +37,14 @@
             background: #ddd;
         }
 
-        ul.list .online{
+        ul.list .online {
             color: #1F811F;
             position: absolute;
             top: 10px;
             right: 15px;
         }
-        ul.list .offline{
+
+        ul.list .offline {
             color: #960817;
             position: absolute;
             top: 10px;
@@ -59,9 +60,62 @@
         <div class="row">
             {% if is_granted('ROLE_USER') %}
                 <div class="col-md-12">
+                    <div class="btn-group">
+                        <button class="btn btn-info" id="add_student_btn">Додати студента</button>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
                     <ul class="list">
 
                     </ul>
+                </div>
+                <div class="col-md-12">
+                    <button id="load" class="btn btn-success">Завантажити ще</button>
+                </div>
+
+                <!-- Modal -->
+                <div id="add_student" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Додати студента</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form action="#" class="student_form">
+                                            <div class="form-group">
+                                                <label for="last_name">Прізвище</label>
+                                                <input type="text" name="last_name" id="last_name" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="first_name">Ім'я</label>
+                                                <input type="text" name="first_name" id="first_name"
+                                                       class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="login">Логін</label>
+                                                <input type="text" name="login" id="login" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">Пароль</label>
+                                                <input type="text" name="password" id="password" class="form-control">
+                                            </div>
+                                            <input type="hidden" name="is_active" value="false">
+                                            <input type="hidden" name="teacher" value="{{ app.user.id }}">
+                                            <input type="submit" id="student_sub" value="Зберегти">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             {% else %}
                 <div class="col-md-12">
@@ -82,22 +136,24 @@
             {% endif %}
 
             var students = [],
-                url = '{{ path('get_students') }}';
+                url = '{{ path('get_students') }}',
+                limit = 5,
+                offset = 0
+            ;
 
             function loadList() {
-                $.getJSON(url, function (data) {
+                query('{{ path('get_student_teacher',{'teacher_id':app.user.id}) }}' + '?limit=' + limit + '&offset=' + offset, 'GET', function (data) {
                     students = data;
                     generateList(students);
-                });
+                }, null);
             }
 
             function generateList(data) {
                 var list = $('ul.list');
-                $(list).empty();
                 if (data.length > 0) {
                     $.each(data, function (key, val) {
                         var liL1 = document.createElement('li');
-                        $(liL1).text(val.last_name + ' ' + val.first_name);
+                        $(liL1).text(val.lastname + ' ' + val.firstname);
                         $(liL1).attr('obj_id', val.id);
                         var span = document.createElement('span');
                         if (val.is_active) {
@@ -119,10 +175,47 @@
                         }
                         $(list).append(liL1);
                     });
+                    if(data.length % limit != 0){
+                        $('#load').remove();
+                    }
 
                 } else {
-
+                    var liL1 = document.createElement('li');
+                    $(liL1).text('Записи відсутні');
+                    $(list).append(liL1);
                 }
+            }
+
+            $('#load').click(function (e) {
+               offset = offset + limit;
+               loadList();
+            });
+
+            $('#add_student_btn').click(function (e) {
+                $('#add_student').modal('show');
+            });
+
+            $('#student_sub').click(function (e) {
+                e.preventDefault();
+                var st = $('.student_form').serializeArray();
+                query('{{ path('post_student') }}', 'POST', function (data) {
+                    alert('Студента створено!');
+                    $('#add_student').modal('hide');
+                    loadList();
+                }, st);
+            });
+
+            function query(url, type, success, data) {
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: data,
+                    success: success,
+                    dataType: "json",
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
             }
 
         })

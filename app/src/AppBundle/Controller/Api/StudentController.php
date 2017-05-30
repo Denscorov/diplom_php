@@ -12,6 +12,7 @@ namespace AppBundle\Controller\Api;
 use AppBundle\Form\StudentType;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use AppBundle\Entity\Student;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -27,9 +28,25 @@ class StudentController extends AbstractApiController
 
     /**
      * @param $id
-     * Put("/{id}/{is_active}", name="active")
+     * Get("/teacher/{teacher_id}", name="teacher")
      */
-    public function putActiveAction($id, $is_active)
+    public function getTeacherAction($teacher_id, Request $request)
+    {
+        $offset = $request->get('offset');
+        $offset = null == $offset ? 0 : $offset;
+        $limit = $request->get('limit');
+        $limit = null == $limit ? 100 : $limit;
+        if (!($object = $this->getDoctrine()->getManager()->getRepository($this->entity)->findBy(['teacher' => $teacher_id],null,$limit,$offset))) {
+            throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $teacher_id));
+        }
+        return $object;
+    }
+
+    /**
+     * @param $id
+     * Get("/{id}/{is_active}", name="active")
+     */
+    public function getActiveAction($id, $is_active)
     {
         if (!($object = $this->get('doctrine')->getManager()->getRepository($this->entity)->find($id))) {
             throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
