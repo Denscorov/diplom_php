@@ -30,7 +30,7 @@ class Test
     /**
      * @var string
      *
-     * @ORM\Column(name="Type", type="string", length=255)
+     * @ORM\Column(name="type", type="string", length=255)
      * @Assert\NotBlank()
      */
     private $type;
@@ -38,7 +38,7 @@ class Test
     /**
      * @var string
      *
-     * @ORM\Column(name="Description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      * @Assert\NotBlank()
      */
     private $description;
@@ -46,18 +46,18 @@ class Test
     /**
      * @var int
      *
-     * @ORM\Column(name="QCount", type="integer")
+     * @ORM\Column(name="q_count", type="integer")
      * @Assert\NotBlank()
      */
-    private $qCount;
+    private $qcount;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="QTCount", type="integer")
+     * @ORM\Column(name="q_t_count", type="integer")
      * @Assert\NotBlank()
      */
-    private $qTCount;
+    private $qtcount;
 
     /**
      * Many Features have One Product.
@@ -66,69 +66,29 @@ class Test
      */
     private $student;
 
-	/**
+    /**
      * @var int
      *
-     * @ORM\Column(name="Date", type="string")
+     * @ORM\Column(name="date", type="string")
      * @Assert\NotBlank()
      */
-	private $date;
+    private $date;
 
-	/**
+    /**
      * @var int
      *
-     * @ORM\Column(name="Time", type="string")
+     * @ORM\Column(name="time", type="string")
      * @Assert\NotBlank()
      */
-	private $time;
+    private $time;
 
-	/**
+    /**
      * @var int
      *
-     * @ORM\Column(name="Timer", type="string")
+     * @ORM\Column(name="timer", type="string")
      * @Assert\NotBlank()
      */
-	private $timer;    
-
-	public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-	public function getDate()
-    {
-        return $this->date;
-    }
-
-	public function setTime($time)
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-	public function getTime()
-    {
-        return $this->time;
-    }
-
-	public function setTimer($timer)
-    {
-        $this->timer = $timer;
-
-        return $this;
-    }
-
-	public function getTimer()
-    {
-        return $this->timer;
-    }
-
-
-
-
+    private $timer;
 
     /**
      * Get id
@@ -141,22 +101,6 @@ class Test
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Test
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
      * @return string
      */
     public function getType()
@@ -165,22 +109,14 @@ class Test
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Test
+     * @param string $type
      */
-    public function setDescription($description)
+    public function setType($type)
     {
-        $this->description = $description;
-
-        return $this;
+        $this->type = $type;
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -189,51 +125,43 @@ class Test
     }
 
     /**
-     * Set qCount
-     *
-     * @param integer $qCount
-     *
-     * @return Test
+     * @param string $description
      */
-    public function setQCount($qCount)
+    public function setDescription($description)
     {
-        $this->qCount = $qCount;
-
-        return $this;
+        $this->description = $description;
     }
 
     /**
-     * Get qCount
-     *
      * @return int
      */
-    public function getQCount()
+    public function getQcount()
     {
-        return $this->qCount;
+        return $this->qcount;
     }
 
     /**
-     * Set qTCount
-     *
-     * @param integer $qTCount
-     *
-     * @return Test
+     * @param int $qcount
      */
-    public function setQTCount($qTCount)
+    public function setQcount($qcount)
     {
-        $this->qTCount = $qTCount;
-
-        return $this;
+        $this->qcount = $qcount;
     }
 
     /**
-     * Get qTCount
-     *
      * @return int
      */
-    public function getQTCount()
+    public function getQtcount()
     {
-        return $this->qTCount;
+        return $this->qtcount;
+    }
+
+    /**
+     * @param int $qtcount
+     */
+    public function setQtcount($qtcount)
+    {
+        $this->qtcount = $qtcount;
     }
 
     /**
@@ -251,6 +179,56 @@ class Test
     {
         $this->student = $student;
     }
+
+    /**
+     * @return int
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param int $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param int $time
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimer()
+    {
+        return $this->timer;
+    }
+
+    /**
+     * @param int $timer
+     */
+    public function setTimer($timer)
+    {
+        $this->timer = $timer;
+    }
+
+
 
 }
 

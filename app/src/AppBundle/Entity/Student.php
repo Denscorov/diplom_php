@@ -31,7 +31,7 @@ class Student
      *
      * @ORM\Column(name="firstName", type="string", length=255)
      * @JMS\Expose
-     *
+     * @Assert\NotBlank()
      */
     private $firstName;
 
@@ -40,7 +40,7 @@ class Student
      *
      * @ORM\Column(name="lastName", type="string", length=255)
      * @JMS\Expose
-     *
+     * @Assert\NotBlank()
      */
     private $lastName;
 
@@ -49,6 +49,7 @@ class Student
      *
      * @ORM\Column(name="login", type="string", length=255, unique=true)
      * @JMS\Expose
+     * @Assert\NotBlank()
      */
     private $login;
 
@@ -57,14 +58,16 @@ class Student
      *
      * @ORM\Column(name="password", type="string", length=255)
      * @JMS\Expose
+     * @Assert\NotBlank()
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="isactive", type="boolean")
+     * @ORM\Column(name="is_active", type="boolean")
      * @JMS\Expose
+     * @Assert\NotBlank()
      *
      */
     private $is_active;

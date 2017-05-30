@@ -13,7 +13,15 @@ class TestType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('type')->add('description')->add('q_count')->add('q_t_count')->add('student');
+        $builder
+            ->add('type')
+            ->add('description')
+            ->add('q_count')
+            ->add('q_t_count')
+            ->add('date')
+            ->add('time')
+            ->add('timer')
+            ->add('student');
     }
     
     /**
