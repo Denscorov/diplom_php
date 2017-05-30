@@ -120,6 +120,9 @@ fos_user:
     from_email:
         address: "den.scorov1@gmail.com"
         sender_name: "DenSkorov"
+    registration:
+        form:
+            name: app_user_registration_custom
 
 fos_rest:
     body_listener: true

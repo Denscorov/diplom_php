@@ -27,7 +27,7 @@ testing_api_php:
 
 testing_api_mysql:
     container_name: testing_api_mysql
-    image: mysql:5.7
+    image: mysql:5.6
     volumes:
         - ./mysql:/var/lib/mysql
     environment:

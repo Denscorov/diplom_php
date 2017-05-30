@@ -99,7 +99,7 @@ class Test
 
 	public function getDate()
     {
-        return $this->gate;
+        return $this->date;
     }
 
 	public function setTime($time)
@@ -127,77 +127,6 @@ class Test
     }
 
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Date", type="string")
-     * @Assert\NotBlank()
-     */
-    private $date;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Time", type="string")
-     * @Assert\NotBlank()
-     */
-    private $time;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Timer", type="string")
-     * @Assert\NotBlank()
-     */
-    private $timer;
-
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param mixed $time
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTimer()
-    {
-        return $this->timer;
-    }
-
-    /**
-     * @param mixed $timer
-     */
-    public function setTimer($timer)
-    {
-        $this->timer = $timer;
-    }
 
 
 

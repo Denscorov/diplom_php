@@ -29,19 +29,19 @@ class User extends BaseUser
      * One Product has Many Features.
      * @ORM\OneToMany(targetEntity="Student", mappedBy="teacher")
      */
-    private $students;
+    protected $students;
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $firstName;
+    protected $firstName;
 
     public function __construct()
     {
