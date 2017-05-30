@@ -1,0 +1,37 @@
+test_app:
+    container_name: test_app
+    image: busybox
+    volumes:
+        - ../app:/var/www/app/
+
+test_nginx:
+    container_name: test_nginx
+    build: builds/nginx
+    volumes_from:
+        - test_app
+    links:
+        - test_php:php
+    volumes:
+        - ./logs/nginx:/var/log/nginx
+    ports:
+        - 80:80
+
+test_php:
+    container_name: test_php
+    build: builds/php-fpm
+    volumes_from:
+        - test_app
+    links:
+        - test_mysql:mysql
+    working_dir: /var/www/app
+
+test_mysql:
+    container_name: test_mysql
+    image: mysql:5.7
+    volumes:
+        - ./mysql:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: db
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
