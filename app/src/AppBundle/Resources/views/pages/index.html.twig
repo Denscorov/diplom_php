@@ -167,7 +167,7 @@
                             $(ulL2).attr('level', 2);
                             $.each(val.tests, function (key, val) {
                                 var liL2 = document.createElement('li');
-                                $(liL2).text("Тест: " + val.description + ' Питань:' + val.q_count + ' Вірних:' + val.q_t_count);
+                                $(liL2).text("Тест: " + val.description + ' Питань: ' + val.qcount + ' Вірних: ' + val.qtcount + ' Дата: ' + val.date + ' Час: ' + val.time + ' Використано часу: ' + val.timer);
                                 $(liL2).attr('obj_id', val.id);
                                 $(ulL2).append(liL2);
                             });
