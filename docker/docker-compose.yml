@@ -1,33 +1,33 @@
-testing_api_app:
-    container_name: testing_api_app
+test_app:
+    container_name: test_app
     image: busybox
     volumes:
         - ../app:/var/www/app/
 
-testing_api_nginx:
-    container_name: testing_api_nginx
+test_nginx:
+    container_name: test_nginx
     build: builds/nginx
     volumes_from:
-        - testing_api_app
+        - test_app
     links:
-        - testing_api_php:php
+        - test_php:php
     volumes:
         - ./logs/nginx:/var/log/nginx
     ports:
         - 80:80
 
-testing_api_php:
-    container_name: testing_api_php
+test_php:
+    container_name: test_php
     build: builds/php-fpm
     volumes_from:
-        - testing_api_app
+        - test_app
     links:
-        - testing_api_mysql:mysql
+        - test_mysql:mysql
     working_dir: /var/www/app
 
-testing_api_mysql:
-    container_name: testing_api_mysql
-    image: mysql:5.6
+test_mysql:
+    container_name: test_mysql
+    image: mysql:5.7
     volumes:
         - ./mysql:/var/lib/mysql
     environment:
