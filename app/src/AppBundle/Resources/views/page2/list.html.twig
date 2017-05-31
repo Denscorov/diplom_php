@@ -1,26 +1,103 @@
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block content %}
-    <h1>List</h1>
-    <ul>
-        {% for item in list %}
-            <li>{{ item.id }}</li>
-            <li>{{ item.name }}</li>
-            <ul>
-                {% for item1 in item.modules %}
-                    <li>{{ item1.id }}</li>
-                    <li>{{ item1.name }}</li>
-                    <ul>
-                        {% for item2 in item1.themes %}
-                            <li>{{ item2.id }}</li>
-                            <li>{{ item2.name }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endfor %}
-            </ul>
-        {% endfor %}
-    </ul>
+{% block css %}
+    <style>
+        ul{
+            list-style: none;
+        }
+        .owner{
+            padding: 0;
+            margin: 15px 0;
+        }
+        .owner li{
+            position: relative;
+            padding: 10px 100px 10px 15px;
+            border-bottom:1px solid #414141;
+        }
+        .owner li.no-empty{
+            cursor: pointer;
+        }
 
+        .owner li[level="1"]{
+            background: #eee;
+        }
+        .owner li[level="2"]{
+            background: #bbb;
+        }
+        .owner li[level="3"]{
+            background: #aaa;
+        }
+        .owner li a{
+            display: block;
+            position: absolute;
+            top:0;
+            bottom: 0;
+            margin: auto;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .owner li a.delete{
+            right:5px;
+            background: red;
+        }
+
+        .owner li a.edit{
+            right:30px;
+            background: green;
+        }
+        .owner li a.questions{
+            right: 55px;
+            background: orange;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <button type="reset" class="add-course btn btn-default">Add course</button>
+                    <button type="reset" class="add-module btn btn-default">Add module</button>
+                    <button type="reset" class="add-theme btn btn-default">Add theme</button>
+                </div>
+                <ul class="owner">
+                    {% for item in list %}
+                        <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
+                        {% if item.modules|length != 0 %} class="no-empty" {% endif %}
+                        >
+                            <span>{{ item.name }}</span>
+                            <a class="delete" href="{{ path('web_delete_course',{'id':item.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a class="edit" href="{{ path('edit_course',{'id':item.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        </li>
+                        <ul id="course_{{ item.id }}" class="collapse">
+                            {% for item1 in item.modules %}
+                                <li data-toggle="collapse" data-target="#module_{{ item1.id }}" level="2"
+                                        {% if item1.themes|length != 0 %} class="no-empty" {% endif %}
+                                >
+                                    <span>{{ item1.name }}</span>
+                                    <a class="delete" href="{{ path('web_delete_module',{'id':item1.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a class="edit" href="{{ path('edit_module',{'id':item1.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </li>
+                                <ul id="module_{{ item1.id }}" class="collapse">
+                                    {% for item2 in item1.themes %}
+                                        <li level="3">
+                                            <span>{{ item2.name }}</span>
+                                            <a class="delete" href="{{ path('web_delete_theme',{'id':item2.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
+                                            <a class="edit" href="{{ path('edit_theme',{'id':item2.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+                                            <a class="questions" href="{{ path('questions_by_theme',{'id':item2.id}) }}"><i class="glyphicon glyphicon-edit"></i></a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
     <div id="course_modal_window" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -32,7 +109,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form_error"></div>
-                            <form method="POST" class="ajaxForm course" action="{{ path('list-entity') }}">
+                            <form method="POST" class="ajaxForm course" action="{{ formCourse.vars.action }}">
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formCourse} %}
                                 </div>
@@ -59,7 +136,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form_error"></div>
-                            <form method="POST" class="ajaxForm module" action="{{ path('list-entity') }}">
+                            <form method="POST" class="ajaxForm module" action="{{ formModule.vars.action }}">
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formModule} %}
                                 </div>
@@ -86,7 +163,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form_error"></div>
-                            <form method="POST" class="ajaxForm theme" action="{{ path('list-entity') }}">
+                            <form method="POST" class="ajaxForm theme" action="{{ formTheme.vars.action }}">
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formTheme} %}
                                 </div>
@@ -108,11 +185,26 @@
     <script>
         $(function () {
 
+            $('.add-course').click(function (e) {
+                $('#course_modal_window').modal('show');
+            });
+
+            $('.add-module').click(function (e) {
+                $('#module_modal_window').modal('show');
+            });
+
+            $('.add-theme').click(function (e) {
+                $('#theme_modal_window').modal('show');
+            });
+
             $(document).on('submit', '.ajaxForm', function (e) {
                 e.preventDefault();
                 query($(this).attr('action'), $(this).attr('method'), $(this).serialize(),
                     function (data) {
                         console.log(data);
+                        alert('Запис добавлено');
+                        $('.modal').modal('hide');
+                        location.reload();
                     },
                     function (jqXHR, textStatus, errorThrown) {
                         if (typeof jqXHR.responseJSON !== 'undefined') {
@@ -139,7 +231,7 @@
                 });
             }
 
-            $('input').addClass('form-control');
+
         });
     </script>
 {% endblock %}

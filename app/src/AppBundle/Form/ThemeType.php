@@ -13,7 +13,11 @@ class ThemeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('module');
+        $builder->add('name', null, [
+            'label' => 'Назва'])->add('module', null, [
+            'required' => true,
+            'label' => 'Модуль'
+        ]);
     }
     
     /**

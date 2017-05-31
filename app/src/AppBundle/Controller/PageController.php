@@ -8,29 +8,31 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Answer;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\Module;
+use AppBundle\Entity\Question;
 use AppBundle\Entity\Theme;
+use AppBundle\Form\AnswerType;
 use AppBundle\Form\CourseType;
 use AppBundle\Form\ModuleType;
+use AppBundle\Form\QuestionType;
 use AppBundle\Form\ThemeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
     /**
-     * @Route("/list-entity", name="list-entity")
+     * @Route("/list-entity", name="list_entity")
      * @Method({"GET"})
      */
     public function getListEntityAction(){
         $list = $this->getDoctrine()->getRepository(Course::class)->findAll();
-        $formCourse = $this->createEntityForm(new Course(), CourseType::class);
-        $formModule = $this->createEntityForm(new Module(), ModuleType::class);
-        $formTheme = $this->createEntityForm(new Theme(), ThemeType::class);
+        $formCourse = $this->createEntityForm(new Course(), CourseType::class, 'create_course', []);
+        $formModule = $this->createEntityForm(new Module(), ModuleType::class, 'create_module', []);
+        $formTheme = $this->createEntityForm(new Theme(), ThemeType::class, 'create_theme', []);
         return $this->render('AppBundle:page2:list.html.twig',[
             'list' => $list,
             'formCourse' => $formCourse->createView(),
@@ -39,44 +41,38 @@ class PageController extends Controller
         ]);
     }
 
-//    /**
-//     * @Route("/create-course", name="create-course")
-//     * @Method("POST")
-//     */
-//    public function createCourseAction(Request $request)
-//    {
-//        if (!$request->isXmlHttpRequest()) {
-//            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
-//        }
-//        $course = new Course();
-//        $form = $this->createCreateForm($course);
-//        $form->handleRequest($request);
-//
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($course);
-//            $em->flush();
-//
-//            return new JsonResponse(array('message' => 'Success!'), 200);
-//        }
-//
-//        $response = new JsonResponse(
-//            array(
-//                'message' => 'Error',
-//                'form' => $this->renderView('AcmeDemoBundle:Demo:form.html.twig',
-//                    array(
-//                        'entity' => $course,
-//                        'form' => $form->createView(),
-//                    ))), 400);
-//
-//        return $response;
-//    }
+    /**
+     * @Route("/list-questions/theme/{id}", name="questions_by_theme")
+     * @Method("GET")
+     */
+    public function getQuestionByThemeAction($id){
+        $questions = $this->getDoctrine()->getRepository(Question::class)->getQuestionByThemeId($id);
 
-    private function createEntityForm($entity, $type)
+        $formQuestion = $this->createEntityForm(new Question(),QuestionType::class,'create_question',['theme_id'=>$id]);
+        $formAnswer = $this->createEntityForm(new Answer(),AnswerType::class,'create_question',['theme_id'=>$id]);
+
+
+        return $this->render('AppBundle:page2:list-questions.html.twig',[
+            'questions' => $questions,
+            'formQuestion' => $formQuestion->createView(),
+            'formAnswer' => $formAnswer->createView(),
+            'theme_id' => $id
+        ]);
+    }
+
+
+
+    /**
+     * @param $entity
+     * @param $type
+     * @param $route
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createEntityForm($entity, $type, $route, $params=null)
     {
         $form = $this->createForm($type, $entity,
             array(
-                'action' => $this->generateUrl('list-entity'),
+                'action' => $this->generateUrl($route, $params),
                 'method' => 'POST',
             ));
 

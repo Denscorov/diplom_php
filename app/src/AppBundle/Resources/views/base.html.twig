@@ -55,12 +55,23 @@
     </div>
 </nav>
 
+<div class="container">
+    <div class="row">
+        {% block info %}
+            <div class="col-md-6 col-md-offset-">
+                {% include 'AppBundle:Alert:alert.html.twig' %}
+            </div>
+        {% endblock %}
+    </div>
+</div>
+
 {% block content %}
 {% endblock %}
 
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="{{ asset('/bundles/app/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/bundles/app/js/script.js') }}"></script>
 {% block js %}
 {% endblock %}
 

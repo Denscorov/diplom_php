@@ -13,7 +13,12 @@ class ModuleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('course');
+        $builder->add('name', null, [
+            'label' => 'Назва'
+        ])->add('course', null, [
+            'required' => true,
+            'label' => 'Курс'
+        ]);
     }
     
     /**

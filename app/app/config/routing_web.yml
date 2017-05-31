@@ -1,0 +1,15 @@
+course_web:
+    resource: AppBundle\Controller\Web\CourseController
+    prefix: /course
+
+module_web:
+    resource: AppBundle\Controller\Web\ModuleController
+    prefix: /module
+
+theme_web:
+    resource: AppBundle\Controller\Web\ThemeController
+    prefix: /theme
+
+question_web:
+    resource: AppBundle\Controller\Web\questionController
+    prefix: /question
