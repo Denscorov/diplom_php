@@ -88,6 +88,57 @@
             color: #fff;
         }
 
+        .delete-q {
+            background: transparent;
+            color: red;
+            border: none;
+            top: 0;
+            bottom:0;
+            margin: auto;
+            right: 0;
+            height: 20px;
+            width: 20px;
+            padding: 0;
+        }
+
+        .delete-q:hover {
+            background: red;
+            color: #fff;
+        }
+
+        .add-a {
+            padding: 0;
+            background: transparent;
+            color: green;
+            border: none;
+            top: 0;
+            bottom:0;
+            margin: auto;
+            right: 25px;
+            height: 20px;
+            width: 20px;
+        }
+
+        .add-a:hover {
+            background: green;
+            color: #fff;
+        }
+
+        .question_list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .question_list li {
+            position: relative;
+            border-bottom: 1px solid #414141;
+            padding: 10px 15px;
+        }
+
+        .question_list li button {
+            position: absolute;
+        }
     </style>
 {% endblock %}
 
@@ -251,12 +302,12 @@
                         <div class="col-md-12">
                             <form action="#" class="module_form">
                                 <div class="form-group">
-                                <label for="module_name">Назва</label>
-                                <input type="text" name="name" id="module_name_edit" class="form-control">
+                                    <label for="module_name">Назва</label>
+                                    <input type="text" name="name" id="module_name_edit" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                <label for="module_course">Курс</label>
-                                <select name="course" id="module_course_edit" class="form-control"></select>
+                                    <label for="module_course">Курс</label>
+                                    <select name="course" id="module_course_edit" class="form-control"></select>
                                 </div>
                                 <input type="submit" value="Зберегти" id="module_sub_edit" class="btn btn-info">
                             </form>
@@ -284,12 +335,12 @@
                         <div class="col-md-12">
                             <form action="#" class="theme_form">
                                 <div class="form-group">
-                                <label for="theme_name">Назва</label>
-                                <input type="text" name="name" id="theme_name_edit" class="form-control">
+                                    <label for="theme_name">Назва</label>
+                                    <input type="text" name="name" id="theme_name_edit" class="form-control">
                                 </div>
                                 <div class="form-control">
-                                <label for="theme_module">Модуль</label>
-                                <select class="form-control" name="module" id="theme_module_edit"></select>
+                                    <label for="theme_module">Модуль</label>
+                                    <select class="form-control" name="module" id="theme_module_edit"></select>
                                 </div>
                                 <input type="submit" value="Зберегти" class="btn btn-info" id="theme_sub_edit">
                             </form>
@@ -316,7 +367,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="q_add btn btn-success">Додати</button>
+                            <button class="q_add btn btn-success">Додати питання</button>
                         </div>
                         <div class="col-md-12">
                             <ul class="question_list"></ul>
@@ -364,12 +415,34 @@
                                         <option value="3">Стаціонар</option>
                                     </select>
                                 </div>
+                                <input type="hidden" name="theme" id="q_theme">
+                                <button type="button" id="question_form_add_answer">Додати відповідь</button>
+                                <div class="form-group answers_add"></div>
                                 <div class="form-group">
-                                    <input type="hidden" name="theme" id="q_theme">
-                                    <input type="submit" value="Зберегти" class="form-control" id="q_sub">
+                                    <input type="submit" value="Зберегти" class=" btn btn-info" id="q_sub">
                                 </div>
-
                             </form>
+                            <div class="template_answer hide">
+                                <div class="form-group">
+                                    <label for="answers[__number__][text]">Текст відповіді</label>
+                                    <input type="text"
+                                           id="answers[__number__][text]"
+                                           name="answers[__number__][text]"
+                                           required="required"
+                                           maxlength="255"
+                                           class="form-control"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="answers[__number__][corect]">Вірність</label>
+                                    <input type="checkbox"
+                                           id="answers[__number__][corect]"
+                                           name="answers[__number__][corect]"
+                                           required="required"
+                                    />
+                                </div>
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -387,7 +460,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Додати питаня</h4>
+                    <h4 class="modal-title">Додати відповідь</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -401,12 +474,10 @@
                                     <label for="q_type">Вірність</label>
                                     <input type="checkbox" name="corect" id="a_corect">
                                 </div>
-
                                 <div class="form-group">
                                     <input type="hidden" name="question" id="a_question">
                                     <input type="submit" value="Зберегти" class="form-control" id="a_sub">
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -710,7 +781,6 @@
             $(document).on('click', '#question_list .delete-q', function (e) {
                 var id = $(this).parent().attr('obj_id');
                 query('/api/questions/' + id, 'DELETE', function (e) {
-                    console.log('question delete success');
                 }, null);
                 questionUpdate();
             });
@@ -723,6 +793,8 @@
             $('#question_add #q_sub').click(function (e) {
                 e.preventDefault();
                 var question = $('#question_add form').serializeArray();
+
+                console.log(question);
                 query('/api/questions', 'POST', function (data) {
                     $('#question_add').modal('hide');
                     $('#question_list .question_list').empty();
@@ -748,12 +820,25 @@
                     corect: $('#answer form #a_corect').is(":checked") == true ? 1 : 0,
                     'question': $('#answer form #a_question').val()
                 };
-                console.log(ans);
                 query('/api/answers', 'POST', function (data) {
                     $('#answer').modal('hide');
                     questionUpdate();
                 }, ans);
             });
+
+// відповіді у питанні
+            var number_answer = 0;
+
+            $('#question_form_add_answer').click(function (e) {
+                var block = $('.template_answer').html();
+//                block.removeClass('hide');
+                var newblock = block.replace(/__number__/g, number_answer);
+                number_answer++;
+                $('.form-group.answers_add').append(newblock);
+
+            });
+
+
 //відправк запитів
             function query(url, type, success, data) {
                 $.ajax({

@@ -34,7 +34,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/doc, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET] }
-        - { path: ^/api/students*, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [PUT] }
+        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET, POST] }
         - { path: ^/api/tests*, role: IS_AUTHENTICATED_ANONYMOUSLY, methods: [POST] }
         - { path: ^/, role: ROLE_USER }

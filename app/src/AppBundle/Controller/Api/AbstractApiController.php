@@ -157,7 +157,6 @@ abstract class AbstractApiController extends FOSRestController
      * @View()
      *
      * @throws NotFoundHttpException
-     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction($id)
     {

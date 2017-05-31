@@ -2,7 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Answer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +15,17 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text')->add('type')->add('level')->add('theme')->add('equivalentWithMe')->add('myEquivalent')->add('answers');
+        $builder
+            ->add('text')
+            ->add('type')
+            ->add('level')
+            ->add('theme')
+//            ->add('equivalentWithMe')
+//            ->add('myEquivalent')
+            ->add('answers', CollectionType::class, [
+                'entry_type' => new Answer()
+            ])
+        ;
     }
 
     /**

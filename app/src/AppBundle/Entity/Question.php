@@ -86,8 +86,8 @@ class Question
 
     public function __construct() {
         $this->answers = new ArrayCollection();
-        $this->friendsWithMe = new ArrayCollection();
-        $this->myFriends = new ArrayCollection();
+        $this->equivalentWithMe = new ArrayCollection();
+        $this->myEquivalent = new ArrayCollection();
     }
 
     /**
