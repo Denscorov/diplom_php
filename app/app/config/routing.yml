@@ -2,11 +2,6 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
-#api:
-#    resource: '.'
-#    type:     'api_platform'
-#    prefix:   '/api' # Optional
-
 fos_user_login:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
@@ -26,3 +21,7 @@ api:
     type: rest
     resource: "routing_api.yml"
     prefix: /api
+
+web:
+    resource: "routing_web.yml"
+    prefix: /web

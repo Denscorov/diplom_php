@@ -83,21 +83,21 @@ class Course
         return $this->name;
     }
 
-//    /**
-//     * @return mixed
-//     */
-//    public function getModules()
-//    {
-//        return $this->modules;
-//    }
-//
-//    /**
-//     * @param mixed $modules
-//     */
-//    public function setModules($modules)
-//    {
-//        $this->modules = $modules;
-//    }
+    /**
+     * @return mixed
+     */
+    public function getModules()
+    {
+        return $this->modules;
+    }
+
+    /**
+     * @param mixed $modules
+     */
+    public function setModules($modules)
+    {
+        $this->modules = $modules;
+    }
 
     public function addModule(Module $module){
         $module->setCourse($this);

@@ -1,0 +1,145 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block content %}
+    <h1>List</h1>
+    <ul>
+        {% for item in list %}
+            <li>{{ item.id }}</li>
+            <li>{{ item.name }}</li>
+            <ul>
+                {% for item1 in item.modules %}
+                    <li>{{ item1.id }}</li>
+                    <li>{{ item1.name }}</li>
+                    <ul>
+                        {% for item2 in item1.themes %}
+                            <li>{{ item2.id }}</li>
+                            <li>{{ item2.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+
+    <div id="course_modal_window" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Новий курс</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form_error"></div>
+                            <form method="POST" class="ajaxForm course" action="{{ path('list-entity') }}">
+                                <div id="form_body">
+                                    {% include 'AppBundle:Form:form.html.twig' with {'form': formCourse} %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="module_modal_window" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Новий курс</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form_error"></div>
+                            <form method="POST" class="ajaxForm module" action="{{ path('list-entity') }}">
+                                <div id="form_body">
+                                    {% include 'AppBundle:Form:form.html.twig' with {'form': formModule} %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="theme_modal_window" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Новий курс</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form_error"></div>
+                            <form method="POST" class="ajaxForm theme" action="{{ path('list-entity') }}">
+                                <div id="form_body">
+                                    {% include 'AppBundle:Form:form.html.twig' with {'form': formTheme} %}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+
+            $(document).on('submit', '.ajaxForm', function (e) {
+                e.preventDefault();
+                query($(this).attr('action'), $(this).attr('method'), $(this).serialize(),
+                    function (data) {
+                        console.log(data);
+                    },
+                    function (jqXHR, textStatus, errorThrown) {
+                        if (typeof jqXHR.responseJSON !== 'undefined') {
+                            if (jqXHR.responseJSON.hasOwnProperty('form')) {
+                                $('#form_body').html(jqXHR.responseJSON.form);
+                            }
+
+                            $('.form_error').html(jqXHR.responseJSON.message);
+
+                        } else {
+                            alert(errorThrown);
+                        }
+                    });
+            });
+
+
+            function query(url, type, data, success, error) {
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: data,
+                    success: success,
+                    error: error
+                });
+            }
+
+            $('input').addClass('form-control');
+        });
+    </script>
+{% endblock %}
