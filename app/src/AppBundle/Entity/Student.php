@@ -67,10 +67,8 @@ class Student
      *
      * @ORM\Column(name="is_active", type="boolean")
      * @JMS\Expose
-     * @Assert\NotBlank()
-     *
      */
-    private $is_active;
+    private $is_active = false;
 
     /**
      * One Product has Many Features.

@@ -12,20 +12,23 @@ use AppBundle\Entity\Answer;
 use AppBundle\Entity\Course;
 use AppBundle\Entity\Module;
 use AppBundle\Entity\Question;
+use AppBundle\Entity\Student;
 use AppBundle\Entity\Theme;
 use AppBundle\Form\AnswerType;
 use AppBundle\Form\CourseType;
 use AppBundle\Form\ModuleType;
 use AppBundle\Form\QuestionType;
+use AppBundle\Form\StudentType;
 use AppBundle\Form\ThemeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
     /**
-     * @Route("/list-entity", name="list_entity")
+     * @Route("/list", name="list_entity")
      * @Method({"GET"})
      */
     public function getListEntityAction(){
@@ -60,7 +63,19 @@ class PageController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function indexAction(Request $request)
+    {
+        $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
+        $formStudent = $this->createEntityForm(new Student(), StudentType::class, 'create_student', []);
 
+        return $this->render('AppBundle:page2:index.html.twig',[
+            'students' => $students,
+            'formStudent' => $formStudent->createView()
+        ]);
+    }
 
     /**
      * @param $entity
@@ -68,7 +83,7 @@ class PageController extends Controller
      * @param $route
      * @return \Symfony\Component\Form\Form
      */
-    private function createEntityForm($entity, $type, $route, $params=null)
+    private function createEntityForm($entity, $type, $route, $params = null)
     {
         $form = $this->createForm($type, $entity,
             array(

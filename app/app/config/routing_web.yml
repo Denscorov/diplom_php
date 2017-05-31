@@ -11,5 +11,9 @@ theme_web:
     prefix: /theme
 
 question_web:
-    resource: AppBundle\Controller\Web\questionController
+    resource: AppBundle\Controller\Web\QuestionController
     prefix: /question
+
+student_web:
+    resource: AppBundle\Controller\Web\StudentController
+    prefix: /student
