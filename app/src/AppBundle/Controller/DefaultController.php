@@ -14,7 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:pages:index.html.twig');
+        return $this->render('AppBundle:page2:index.html.twig');
     }
 
     /**
@@ -22,6 +22,6 @@ class DefaultController extends Controller
      */
     public function listAction(Request $request)
     {
-        return $this->render('AppBundle:pages:list.html.twig');
+        return $this->render('AppBundle:page2:list.html.twig');
     }
 }

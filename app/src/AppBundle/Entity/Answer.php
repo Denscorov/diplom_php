@@ -47,7 +47,7 @@ class Answer
 
     /**
      * Many Features have One Product.
-     * @ORM\ManyToOne(targetEntity="Question", inversedBy="answers", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="answers", cascade={"persist"})
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
     private $question;

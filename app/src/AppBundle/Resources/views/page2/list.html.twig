@@ -2,35 +2,41 @@
 
 {% block css %}
     <style>
-        ul{
+        ul {
             list-style: none;
         }
-        .owner{
+
+        .owner {
             padding: 0;
             margin: 15px 0;
         }
-        .owner li{
+
+        .owner li {
             position: relative;
             padding: 10px 100px 10px 15px;
-            border-bottom:1px solid #414141;
+            border-bottom: 1px solid #414141;
         }
-        .owner li.no-empty{
+
+        .owner li.no-empty {
             cursor: pointer;
         }
 
-        .owner li[level="1"]{
+        .owner li[level="1"] {
             background: #eee;
         }
-        .owner li[level="2"]{
+
+        .owner li[level="2"] {
             background: #bbb;
         }
-        .owner li[level="3"]{
+
+        .owner li[level="3"] {
             background: #aaa;
         }
-        .owner li a{
+
+        .owner li a {
             display: block;
             position: absolute;
-            top:0;
+            top: 0;
             bottom: 0;
             margin: auto;
             width: 20px;
@@ -38,16 +44,18 @@
             color: #fff;
             text-align: center;
         }
-        .owner li a.delete{
-            right:5px;
+
+        .owner li a.delete {
+            right: 5px;
             background: red;
         }
 
-        .owner li a.edit{
-            right:30px;
+        .owner li a.edit {
+            right: 30px;
             background: green;
         }
-        .owner li a.questions{
+
+        .owner li a.questions {
             right: 55px;
             background: orange;
         }
@@ -59,18 +67,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <div>
-                    <button type="reset" class="add-course btn btn-default">Add course</button>
-                    <button type="reset" class="add-module btn btn-default">Add module</button>
-                    <button type="reset" class="add-theme btn btn-default">Add theme</button>
+                    <button type="reset" class="add-course btn btn-default">Додати курс</button>
+                    <button type="reset" class="add-module btn btn-default">Додати модуль</button>
+                    <button type="reset" class="add-theme btn btn-default">Додати тему</button>
                 </div>
                 <ul class="owner">
+                    {% if list|length != 0 %}
                     {% for item in list %}
                         <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
-                        {% if item.modules|length != 0 %} class="no-empty" {% endif %}
+                                {% if item.modules|length != 0 %} class="no-empty" {% endif %}
                         >
                             <span>{{ item.name }}</span>
-                            <a class="delete" href="{{ path('web_delete_course',{'id':item.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
-                            <a class="edit" href="{{ path('edit_course',{'id':item.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a class="delete" href="{{ path('web_delete_course',{'id':item.id}) }}"><i
+                                        class="glyphicon glyphicon-remove"></i></a>
+                            <a class="edit" href="{{ path('edit_course',{'id':item.id}) }}"><i
+                                        class="glyphicon glyphicon-pencil"></i></a>
                         </li>
                         <ul id="course_{{ item.id }}" class="collapse">
                             {% for item1 in item.modules %}
@@ -78,22 +89,31 @@
                                         {% if item1.themes|length != 0 %} class="no-empty" {% endif %}
                                 >
                                     <span>{{ item1.name }}</span>
-                                    <a class="delete" href="{{ path('web_delete_module',{'id':item1.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
-                                    <a class="edit" href="{{ path('edit_module',{'id':item1.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a class="delete" href="{{ path('web_delete_module',{'id':item1.id}) }}"><i
+                                                class="glyphicon glyphicon-remove"></i></a>
+                                    <a class="edit" href="{{ path('edit_module',{'id':item1.id}) }}"><i
+                                                class="glyphicon glyphicon-pencil"></i></a>
                                 </li>
                                 <ul id="module_{{ item1.id }}" class="collapse">
                                     {% for item2 in item1.themes %}
                                         <li level="3">
                                             <span>{{ item2.name }}</span>
-                                            <a class="delete" href="{{ path('web_delete_theme',{'id':item2.id}) }}"><i class="glyphicon glyphicon-remove"></i></a>
-                                            <a class="edit" href="{{ path('edit_theme',{'id':item2.id}) }}"><i class="glyphicon glyphicon-pencil"></i></a>
-                                            <a class="questions" href="{{ path('questions_by_theme',{'id':item2.id}) }}"><i class="glyphicon glyphicon-edit"></i></a>
+                                            <a class="delete" href="{{ path('web_delete_theme',{'id':item2.id}) }}"><i
+                                                        class="glyphicon glyphicon-remove"></i></a>
+                                            <a class="edit" href="{{ path('edit_theme',{'id':item2.id}) }}"><i
+                                                        class="glyphicon glyphicon-pencil"></i></a>
+                                            <a class="questions"
+                                               href="{{ path('questions_by_theme',{'id':item2.id}) }}"><i
+                                                        class="glyphicon glyphicon-edit"></i></a>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             {% endfor %}
                         </ul>
                     {% endfor %}
+                    {% else %}
+                        <li level="1">Записи відсутні</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -113,7 +133,7 @@
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formCourse} %}
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Зберегти</button>
                             </form>
                         </div>
                     </div>
@@ -130,7 +150,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Новий курс</h4>
+                    <h4 class="modal-title">Новий модуль</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -140,7 +160,7 @@
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formModule} %}
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Зберегти</button>
                             </form>
                         </div>
                     </div>
@@ -157,7 +177,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Новий курс</h4>
+                    <h4 class="modal-title">Нова тема</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -167,7 +187,7 @@
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formTheme} %}
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Зберегти</button>
                             </form>
                         </div>
                     </div>

@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div>
-                    <button type="reset" class="add-question btn btn-default">Add question</button>
+                    <button type="reset" class="add-question btn btn-default">Додати питання</button>
                 </div>
                 <ul class="owner">
                     {% if questions|length != 0 %}
@@ -73,19 +73,21 @@
                                     {% if item.answers|length != 0 %} class="no-empty" {% endif %}
                             >
                                 <span>{{ item.text }}</span>
-                                <a class="delete" href="{{ path('web_delete_course',{'id':item.id}) }}"><i
-                                class="glyphicon glyphicon-remove"></i></a>
+                                <a class="delete"
+                                   href="{{ path('web_delete_question',{'id':item.id, 'theme_id':theme_id}) }}"><i
+                                            class="glyphicon glyphicon-remove"></i></a>
                                 <a class="edit" href="{{ path('edit_question',{'id':item.id,'theme_id':theme_id}) }}"><i
-                                class="glyphicon glyphicon-pencil"></i></a>
+                                            class="glyphicon glyphicon-pencil"></i></a>
                             </li>
                             <ul id="course_{{ item.id }}" class="collapse">
                                 {% for item1 in item.answers %}
                                     <li data-toggle="collapse" data-target="#module_{{ item1.id }}" level="2">
                                         <span>{{ item1.text }}</span>
-                                        <a class="delete" href="{{ path('web_delete_module',{'id':item1.id}) }}"><i
-                                        class="glyphicon glyphicon-remove"></i></a>
-                                        <a class="edit" href="{{ path('edit_module',{'id':item1.id}) }}"><i
-                                        class="glyphicon glyphicon-pencil"></i></a>
+                                        <a class="delete"
+                                           href="{{ path('web_delete_answer',{'id':item1.id,'theme_id':theme_id}) }}"><i
+                                                    class="glyphicon glyphicon-remove"></i></a>
+                                        {#<a class="edit" href="{{ path('edit_module',{'id':item1.id}) }}"><i#}
+                                        {#class="glyphicon glyphicon-pencil"></i></a>#}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -114,7 +116,7 @@
                                 <div id="form_body">
                                     {% include 'AppBundle:Form:form.html.twig' with {'form': formQuestion} %}
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Зберегти</button>
                             </form>
                         </div>
                     </div>
@@ -169,22 +171,20 @@
                 });
             }
 
-///*******************************************************
             var answers_div = $('.answers_div');
 
-            $(answers_div).append("<button type='button' id='add_ans'>Add</button>");
+            $(answers_div).append("<button type='button' id='add_ans'>Додати</button>");
 
             $(answers_div).data('index', answers_div.find(':input').length);
-
 
             $('#add_ans').click(function (e) {
                 var answer = $(answers_div).attr('data-prototype');
                 var index = $(answers_div).data('index');
-                var newForm = answer.replace(/__name__label__/g, 'Відповідь ' + index).replace(/__name__/g, index);;
+                var newForm = answer.replace(/__name__label__/g, 'Відповідь ' + index).replace(/__name__/g, index);
+                ;
                 $(answers_div).data('index', index + 1);
                 $(answers_div).append(newForm);
             });
-
         });
     </script>
 {% endblock %}

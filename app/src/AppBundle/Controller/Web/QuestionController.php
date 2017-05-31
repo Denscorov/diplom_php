@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller\Web;
 
+use AppBundle\Entity\Answer;
 use AppBundle\Entity\Question;
 use AppBundle\Entity\Theme;
 use AppBundle\Form\QuestionType;
@@ -29,7 +30,7 @@ class QuestionController extends Controller
             return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
         }
         $question = new Question();
-        $form = $this->createEntityForm($question, QuestionType::class, 'create_question',['theme_id'=>$theme_id]);
+        $form = $this->createEntityForm($question, QuestionType::class, 'create_question', ['theme_id' => $theme_id]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -56,7 +57,8 @@ class QuestionController extends Controller
     /**
      * @Route("/edit/{id}/{theme_id}", name="edit_question")
      */
-    public function editAction($id, $theme_id, Request $request){
+    public function editAction($id, $theme_id, Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $course = $em->getRepository(Question::class)->find($id);
         if (!$course) {
@@ -72,32 +74,50 @@ class QuestionController extends Controller
             $em->persist($object);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'Питання редаговано!!!');
-            return $this->redirectToRoute('questions_by_theme',['id'=>$theme_id]);
+            return $this->redirectToRoute('questions_by_theme', ['id' => $theme_id]);
         }
         return $this->render('AppBundle:page2:edit.html.twig', array(
             'form' => $form->createView()
         ));
     }
 
-//    /**
-//     * @Route("/delete/{id}", name="web_delete_theme")
-//     */
-//    public function deleteAction($id)
-//    {
-//        $theme = $this->getDoctrine()->getRepository(Theme::class)->find($id);
-//        if (!$theme != null) {
-//            throw $this->createNotFoundException(
-//                'No news found for id ' . $id
-//            );
-//        }
-//        $em = $this->getDoctrine()->getManager();
-//        $em->remove($theme);
-//        $em->flush();
-//        $this->get('session')->getFlashBag()->add('failed', 'Тему видалено!!!');
-//        return $this->redirectToRoute('list_entity');
-//    }
+    /**
+     * @Route("/delete/{id}/{theme_id}", name="web_delete_question")
+     */
+    public function deleteAction($id, $theme_id)
+    {
+        $theme = $this->getDoctrine()->getRepository(Question::class)->find($id);
+        if (!$theme != null) {
+            throw $this->createNotFoundException(
+                'No news found for id ' . $id
+            );
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($theme);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('failed', 'Питання видалено!!!');
+        return $this->redirectToRoute('questions_by_theme', ['id' => $theme_id]);
+    }
 
-    private function createEntityForm($entity, $type, $route, $params=null)
+    /**
+     * @Route("/delete/answer/{id}/{theme_id}", name="web_delete_answer")
+     */
+    public function deleteAnswerAction($id, $theme_id)
+    {
+        $theme = $this->getDoctrine()->getRepository(Answer::class)->find($id);
+        if (!$theme != null) {
+            throw $this->createNotFoundException(
+                'No news found for id ' . $id
+            );
+        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($theme);
+        $em->flush();
+        $this->get('session')->getFlashBag()->add('failed', 'Відповідь видалено!!!');
+        return $this->redirectToRoute('questions_by_theme', ['id' => $theme_id]);
+    }
+
+    private function createEntityForm($entity, $type, $route, $params = null)
     {
         $form = $this->createForm($type, $entity,
             array(
