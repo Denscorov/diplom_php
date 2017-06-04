@@ -1,0 +1,223 @@
+.checkbox {
+    vertical-align: top;
+    margin: 0 3px 0 0;
+    width: 17px;
+    height: 17px;
+}
+
+.checkbox + label {
+    cursor: pointer;
+}
+
+.checkbox:not(checked) {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkbox:not(checked) + label {
+    position: relative;
+    padding: 0 0 0 60px;
+}
+
+.checkbox:not(checked) + label:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 50px;
+    height: 26px;
+    border-radius: 13px;
+    background: #CDD1DA;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, .2);
+}
+
+.checkbox:not(checked) + label:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+    transition: all .2s;
+}
+
+.checkbox:checked + label:before {
+    background: #9FD468;
+}
+
+.checkbox:checked + label:after {
+    left: 26px;
+}
+
+.checkbox:focus + label:before {
+    box-shadow: 0 0 0 3px rgba(255, 255, 0, .5);
+}
+
+ul {
+    list-style: none;
+}
+
+.owner {
+    padding: 0;
+    margin: 15px 0;
+}
+
+.owner li {
+    width: 100%;
+    position: relative;
+    padding: 10px 100px 10px 15px;
+    border-bottom: 1px solid #414141;
+}
+
+.owner li.no-empty {
+    cursor: pointer;
+}
+
+.owner li[level="1"] {
+    background: #eee;
+}
+
+.owner li[level="2"] {
+    background: #bbb;
+    padding: 10px;
+}
+
+.owner li a, .owner li .status {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.owner li a.delete {
+    right: 5px;
+    background: red;
+}
+
+.owner li a.edit {
+    right: 30px;
+    background: green;
+}
+
+.owner li .status {
+    right: 60px;
+    width: 50px;
+}
+
+.owner li .status > .online {
+    color: green;
+}
+
+.owner li .status > .offline {
+    color: red;
+}
+
+.owner > li .fa {
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    position: absolute;
+    width: 15px;
+    height: 18px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 100%;
+    text-align: center;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    font-weight: 700;
+    font-size: large;
+}
+
+.owner > li[aria-expanded=true] .fa {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+ul {
+    list-style: none;
+}
+
+.owner {
+    padding: 0;
+    margin: 15px 0;
+}
+
+.owner li {
+    position: relative;
+    padding: 10px 100px 10px 15px;
+    border-bottom: 1px solid #414141;
+}
+
+.owner li.no-empty {
+    cursor: pointer;
+}
+
+.owner li[level="1"] {
+    background: #eee;
+}
+
+.owner li[level="2"] {
+    background: #bbb;
+}
+
+.owner li[level="3"] {
+    background: #aaa;
+}
+
+.owner li a {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.owner li a.delete {
+    right: 5px;
+    background: red;
+}
+
+.owner li a.edit {
+    right: 30px;
+    background: green;
+}
+
+.owner li a.questions {
+    right: 55px;
+    background: orange;
+}
+
+.owner li .fa {
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    position: absolute;
+    width: 15px;
+    height: 18px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 100%;
+    text-align: center;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    font-weight: 700;
+    font-size: large;
+}
+
+.owner li[aria-expanded=true] .fa {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
