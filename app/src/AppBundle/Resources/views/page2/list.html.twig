@@ -59,6 +59,28 @@
             right: 55px;
             background: orange;
         }
+
+        .owner li .fa {
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
+            position: absolute;
+            width: 20px;
+            height: 26px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            right: 100%;
+            text-align: center;
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            font-weight: 700;
+            font-size: x-large;
+        }
+
+        .owner li[aria-expanded=true] .fa {
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
     </style>
 {% endblock %}
 
@@ -75,8 +97,8 @@
                     {% if list|length != 0 %}
                     {% for item in list %}
                         <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
-                                {% if item.modules|length != 0 %} class="no-empty" {% endif %}
-                        >
+                                {% if item.modules|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
+                                                                                    aria-hidden="true"></i>{% else %}> {% endif %}
                             <span>{{ item.name }}</span>
                             <a class="delete" href="{{ path('web_delete_course',{'id':item.id}) }}"><i
                                         class="glyphicon glyphicon-remove"></i></a>
@@ -86,8 +108,8 @@
                         <ul id="course_{{ item.id }}" class="collapse">
                             {% for item1 in item.modules %}
                                 <li data-toggle="collapse" data-target="#module_{{ item1.id }}" level="2"
-                                        {% if item1.themes|length != 0 %} class="no-empty" {% endif %}
-                                >
+                                        {% if item1.themes|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
+                                                                                              aria-hidden="true"></i>{% else %}> {% endif %}
                                     <span>{{ item1.name }}</span>
                                     <a class="delete" href="{{ path('web_delete_module',{'id':item1.id}) }}"><i
                                                 class="glyphicon glyphicon-remove"></i></a>
