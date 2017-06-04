@@ -70,6 +70,28 @@
         .owner li .status > .offline {
             color: red;
         }
+
+        .owner > li .fa {
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
+            position: absolute;
+            width: 15px;
+            height: 26px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            right: 100%;
+            text-align: center;
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+            font-weight: 700;
+            font-size: x-large;
+        }
+
+        .owner > li[aria-expanded=true] .fa {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
     </style>
 {% endblock %}
 
