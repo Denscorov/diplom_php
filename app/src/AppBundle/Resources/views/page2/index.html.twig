@@ -31,7 +31,7 @@
             padding: 10px;
         }
 
-        .owner li a {
+        .owner li a, .owner li .status {
             display: block;
             position: absolute;
             top: 0;
@@ -57,6 +57,19 @@
             right: 55px;
             background: orange;
         }
+
+        .owner li .status {
+            right: 60px;
+            width: 50px;
+        }
+
+        .owner li .status > .online {
+            color: green;
+        }
+
+        .owner li .status > .offline {
+            color: red;
+        }
     </style>
 {% endblock %}
 
@@ -71,14 +84,20 @@
                     {% if students|length != 0 %}
                         {% for item in students %}
                             <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
-                                    {% if item.tests|length != 0 %} class="no-empty" {% endif %}
-                            >
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    {% if item.tests|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
+                                                                                        aria-hidden="true"></i>{% else %}> {% endif %}
                                 <span>{{ item.lastName|title ~ ' ' ~ item.firstName|title }}</span>
                                 <a class="delete" href="{{ path('web_delete_student',{'id':item.id}) }}"><i
                                             class="glyphicon glyphicon-remove"></i></a>
                                 <a class="edit" href="{{ path('edit_student',{'id':item.id}) }}"><i
                                             class="glyphicon glyphicon-pencil"></i></a>
+                                <span class="status">
+                                    {% if item.isactive %}
+                                        <span class="online">Online</span>
+                                    {% else %}
+                                        <span class="offline">Offline</span>
+                                    {% endif %}
+                                </span>
                             </li>
                             <ul id="course_{{ item.id }}" class="collapse">
                                 {% for item1 in item.tests %}
