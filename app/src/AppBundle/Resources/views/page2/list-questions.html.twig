@@ -18,6 +18,20 @@
                                     {% if item.answers|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
                                                                                           aria-hidden="true"></i>{% else %}>{% endif %}
                                 <span>{{ item.text }}</span>
+                                <p>Рівень:
+                                    {% if item.level == 0 %}
+                                        <span class="text-success">Екстернат</span>
+                                    {% endif %}
+                                    {% if item.level == 1 %}
+                                        <span class="text-warning">Заочна форма</span>
+                                    {% endif %}
+                                    {% if item.level == 2 %}
+                                        <span class="text-danger">Заочна та стаціонар</span>
+                                    {% endif %}
+                                    {% if item.level == 3 %}
+                                        <span class="text-danger">Стаціонар</span>
+                                    {% endif %}
+                                </p>
                                 <a class="delete"
                                    href="{{ path('web_delete_question',{'id':item.id, 'theme_id':theme_id}) }}"><i
                                             class="glyphicon glyphicon-remove"></i></a>
@@ -27,7 +41,7 @@
                             <ul id="course_{{ item.id }}" class="collapse">
                                 {% for item1 in item.answers %}
                                     <li data-toggle="collapse" data-target="#module_{{ item1.id }}" level="2">
-                                        <span>{{ item1.text }}</span>
+                                        <span {% if item1.corect %} class="text-success" {% else %} class="text-danger" {% endif %}>{{ item1.text }}</span>
                                         <a class="delete"
                                            href="{{ path('web_delete_answer',{'id':item1.id,'theme_id':theme_id}) }}"><i
                                                     class="glyphicon glyphicon-remove"></i></a>
