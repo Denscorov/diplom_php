@@ -40,6 +40,7 @@
                                         <li level="3">
                                             <span>{{ item2.name }}</span>
                                             <p>Кількість питань: {{ item2.questions|length }}</p>
+
                                             <a class="delete" href="{{ path('web_delete_theme',{'id':item2.id}) }}"><i
                                                         class="glyphicon glyphicon-remove"></i></a>
                                             <a class="edit" href="{{ path('edit_theme',{'id':item2.id}) }}"><i
