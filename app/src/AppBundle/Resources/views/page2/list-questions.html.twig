@@ -15,7 +15,7 @@
                     {% if questions|length != 0 %}
                         {% for item in questions %}
                             <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
-                                    {% if item.modules|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
+                                    {% if item.answers|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
                                                                                           aria-hidden="true"></i>{% else %}>{% endif %}
                                 <span>{{ item.text }}</span>
                                 <a class="delete"
@@ -31,8 +31,6 @@
                                         <a class="delete"
                                            href="{{ path('web_delete_answer',{'id':item1.id,'theme_id':theme_id}) }}"><i
                                                     class="glyphicon glyphicon-remove"></i></a>
-                                        {#<a class="edit" href="{{ path('edit_module',{'id':item1.id}) }}"><i#}
-                                        {#class="glyphicon glyphicon-pencil"></i></a>#}
                                     </li>
                                 {% endfor %}
                             </ul>
