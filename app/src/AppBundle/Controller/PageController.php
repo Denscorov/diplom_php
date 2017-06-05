@@ -68,7 +68,7 @@ class PageController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
+        $students = $this->getDoctrine()->getRepository(Student::class)->findBy(['teacher' => $this->getUser()->getId()]);
         $formStudent = $this->createEntityForm(new Student(), StudentType::class, 'create_student', []);
 
         return $this->render('AppBundle:page2:index.html.twig',[
