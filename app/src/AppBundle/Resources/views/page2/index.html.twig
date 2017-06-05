@@ -73,7 +73,7 @@
                             <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
                                     {% if item.tests|length != 0 %} class="no-empty" {% endif %}
                             >
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                <i class="fa fa-angle-right"></i>
                                 <span>{{ item.lastName|title ~ ' ' ~ item.firstName|title }}</span>
                                 <a class="delete" href="{{ path('web_delete_student',{'id':item.id}) }}"><i
                                             class="glyphicon glyphicon-remove"></i></a>
