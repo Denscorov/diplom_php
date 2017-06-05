@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class StudentType extends AbstractType
 {
@@ -26,7 +27,7 @@ class StudentType extends AbstractType
             ->add('password', null, [
                 'label' => 'Пароль'
             ])
-            ->add('is_active', null, [
+            ->add('is_active', HiddenType::class, [
                 'required' => false
             ])
         ;
