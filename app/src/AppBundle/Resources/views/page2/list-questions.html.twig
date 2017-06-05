@@ -1,61 +1,6 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block css %}
-    <style>
-        ul {
-            list-style: none;
-        }
-
-        .owner {
-            padding: 0;
-            margin: 15px 0;
-        }
-
-        .owner li {
-            position: relative;
-            padding: 10px 100px 10px 15px;
-            border-bottom: 1px solid #414141;
-        }
-
-        .owner li.no-empty {
-            cursor: pointer;
-        }
-
-        .owner li[level="1"] {
-            background: #eee;
-        }
-
-        .owner li[level="2"] {
-            background: #bbb;
-        }
-
-        .owner li[level="3"] {
-            background: #aaa;
-        }
-
-        .owner li a {
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            width: 20px;
-            height: 20px;
-            color: #fff;
-            text-align: center;
-        }
-
-        .owner li a.delete {
-            right: 5px;
-            background: red;
-        }
-
-        .owner li a.edit {
-            right: 30px;
-            background: green;
-        }
-
-    </style>
 {% endblock %}
 
 
@@ -70,8 +15,8 @@
                     {% if questions|length != 0 %}
                         {% for item in questions %}
                             <li data-toggle="collapse" data-target="#course_{{ item.id }}" level="1"
-                                    {% if item.answers|length != 0 %} class="no-empty" {% endif %}
-                            >
+                                    {% if item.modules|length != 0 %} class="no-empty"><i class="fa fa-angle-right"
+                                                                                          aria-hidden="true"></i>{% else %}>{% endif %}
                                 <span>{{ item.text }}</span>
                                 <a class="delete"
                                    href="{{ path('web_delete_question',{'id':item.id, 'theme_id':theme_id}) }}"><i
